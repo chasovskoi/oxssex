@@ -1,28 +1,64 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { ArrowDownRight, ArrowLeft, ArrowRight, CaretDown, Moon, Sun, PaperPlaneTilt, TelegramLogo } from '@phosphor-icons/react'
+import { ArrowDownRight, ArrowLeft, ArrowRight, CaretDown, Moon, Sun, PaperPlaneTilt, TelegramLogo, X } from '@phosphor-icons/react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
+const imagePath = (fileName) => `${import.meta.env.BASE_URL}images/${fileName}`
+
 const projects = [
   {
-    title: 'Aperture',
-    type: 'Креативная студия',
-    image: '/images/project-aperture.jpg',
+    title: 'oxssex',
+    type: 'Персональное портфолио',
+    year: '2026',
+    image: imagePath('project-oxssex.png'),
+    alt: 'Меню услуг в портфолио oxssex',
     className: 'project--lead',
+    summary: 'Личный сайт, который показывает специализацию, процесс и характер работы до первого сообщения.',
+    challenge: 'Собрать услуги, кейсы и прямой контакт на одной странице, не превращая портфолио в каталог.',
+    solution: 'Крупная типографика, живые состояния и motion-сцены ведут пользователя от знакомства к заявке.',
+    role: 'Стратегия, UX/UI, React-разработка',
+    stack: 'React, Vite, GSAP, CSS',
   },
   {
     title: 'Nocturne',
-    type: 'Музыкальная платформа',
-    image: '/images/project-nocturne.jpg',
+    type: 'Концепт музыкальной платформы',
+    year: '2026',
+    image: imagePath('project-nocturne.jpg'),
+    alt: 'Панорама города для визуального направления Nocturne',
     className: '',
+    summary: 'Атмосферный интерфейс для музыкальных подборок, где настроение важнее количества элементов.',
+    challenge: 'Дать музыке визуальный ритм и сохранить простой путь от открытия подборки до прослушивания.',
+    solution: 'Контрастная композиция, монохромная фотография и спокойная анимация создают цельный сценарий.',
+    role: 'Концепция, арт-дирекшн, прототип',
+    stack: 'Figma, React, GSAP',
   },
   {
     title: 'Forma',
-    type: 'Архитектурное бюро',
-    image: '/images/project-forma.jpg',
+    type: 'Концепт архитектурного бюро',
+    year: '2026',
+    image: imagePath('project-aperture.jpg'),
+    alt: 'Архитектура исторического здания для проекта Forma',
     className: '',
+    summary: 'Сдержанный сайт бюро, в котором проекты читаются как пространство, а не как набор карточек.',
+    challenge: 'Показать масштаб архитектуры и одновременно сделать навигацию по работам быстрой и ясной.',
+    solution: 'Вертикальный ритм, крупные кадры и минимум интерфейсного шума оставляют внимание проектам.',
+    role: 'UX/UI, визуальная система, frontend',
+    stack: 'Figma, React, CSS Grid',
+  },
+  {
+    title: 'Aperture',
+    type: 'Концепт сайта фотостудии',
+    year: '2026',
+    image: imagePath('project-forma.jpg'),
+    alt: 'Плёночные камеры для проекта Aperture',
+    className: '',
+    summary: 'Портфолио фотостудии с акцентом на серии работ, фактуру плёнки и уверенную подачу услуг.',
+    challenge: 'Соединить эмоциональную галерею с понятным коммерческим предложением и быстрым контактом.',
+    solution: 'Асимметричная сетка и тактильные переходы превращают просмотр работ в короткую визуальную историю.',
+    role: 'Концепция, UX/UI, motion',
+    stack: 'Figma, React, GSAP',
   },
 ]
 
@@ -37,17 +73,17 @@ const principles = [
   {
     title: 'Сначала смысл',
     text: 'Каждая секция отвечает на один вопрос. Дизайн усиливает ответ, а не спорит с ним.',
-    image: '/images/principle-focus.jpg',
+    image: imagePath('principle-focus.jpg'),
   },
   {
     title: 'Движение по делу',
     text: 'Анимация показывает иерархию, смену состояния и ход истории. Никакого визуального шума.',
-    image: '/images/principle-motion.jpg',
+    image: imagePath('principle-motion.jpg'),
   },
   {
     title: 'Готово к росту',
     text: 'Компоненты и контент устроены так, чтобы новые кейсы добавлялись без полного редизайна.',
-    image: '/images/project-forma.jpg',
+    image: imagePath('project-forma.jpg'),
   },
 ]
 
@@ -196,7 +232,7 @@ function Hero() {
       <div className="hero-title" aria-label="Создаю сайты, в которые верят">
         <div className="hero-line"><span>Создаю сайты,</span></div>
         <div className="hero-line hero-line--offset">
-          <span>в которые <i className="inline-image" aria-hidden="true" /> верят</span>
+          <span>в которые <i className="inline-image" style={{ backgroundImage: `url(${imagePath('principle-motion.jpg')})` }} aria-hidden="true" /> верят</span>
         </div>
       </div>
       <div className="hero-bottom">
@@ -214,7 +250,7 @@ function Hero() {
           <a className="button button--secondary" href="#contact">Обсудить проект</a>
         </div>
       </div>
-      <div className="hero-media" aria-hidden="true">
+      <div className="hero-media" style={{ backgroundImage: `url(${imagePath('project-aperture.jpg')})` }} aria-hidden="true">
         <div className="hero-media__veil" />
       </div>
     </section>
@@ -223,6 +259,17 @@ function Hero() {
 
 function Work() {
   const root = useRef(null)
+  const dialog = useRef(null)
+  const [selectedProject, setSelectedProject] = useState(null)
+
+  useEffect(() => {
+    if (!selectedProject || dialog.current?.open) return
+    dialog.current?.showModal()
+  }, [selectedProject])
+
+  function closeProject() {
+    dialog.current?.close()
+  }
 
   useLayoutEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
@@ -245,22 +292,64 @@ function Work() {
     <section className="section work" id="work" ref={root}>
       <p className="eyebrow">Избранные работы</p>
       <h2>Проекты, которым есть что сказать.</h2>
-      <p className="section-copy">Сейчас это художественные направления. Скоро здесь появятся реальные продукты, которые мы создадим вместе.</p>
+      <p className="section-copy">Один запущенный проект и три концепта, в которых видно мой подход к структуре, визуалу и движению.</p>
       <div className="project-grid">
         {projects.map((project) => (
-          <article className={`project ${project.className}`} key={project.title}>
-            <img src={project.image} alt="" />
+          <button
+            className={`project ${project.className}`}
+            type="button"
+            onClick={() => setSelectedProject(project)}
+            aria-label={`Открыть кейс ${project.title}`}
+            key={project.title}
+          >
+            <img src={project.image} alt={project.alt} loading="lazy" />
             <div className="project-shade" />
             <div className="project-meta">
               <div>
                 <h3>{project.title}</h3>
-                <p>{project.type}</p>
+                <p>{project.type} <span aria-hidden="true">/</span> {project.year}</p>
               </div>
               <span className="project-arrow" aria-hidden="true"><ArrowDownRight size={22} /></span>
             </div>
-          </article>
+          </button>
         ))}
       </div>
+      <dialog
+        className="project-dialog"
+        ref={dialog}
+        onClose={() => setSelectedProject(null)}
+        onClick={(event) => event.target === event.currentTarget && closeProject()}
+      >
+        {selectedProject && (
+          <div className="project-dialog__panel">
+            <button className="project-dialog__close" type="button" onClick={closeProject} aria-label="Закрыть кейс">
+              <X size={22} />
+            </button>
+            <div className="project-dialog__media">
+              <img src={selectedProject.image} alt={selectedProject.alt} />
+            </div>
+            <div className="project-dialog__content">
+              <p className="project-dialog__type">{selectedProject.type} / {selectedProject.year}</p>
+              <h3>{selectedProject.title}</h3>
+              <p className="project-dialog__summary">{selectedProject.summary}</p>
+              <div className="project-dialog__facts">
+                <section>
+                  <h4>Задача</h4>
+                  <p>{selectedProject.challenge}</p>
+                </section>
+                <section>
+                  <h4>Решение</h4>
+                  <p>{selectedProject.solution}</p>
+                </section>
+              </div>
+              <div className="project-dialog__footer">
+                <p><strong>Моя роль</strong><span>{selectedProject.role}</span></p>
+                <p><strong>Инструменты</strong><span>{selectedProject.stack}</span></p>
+              </div>
+            </div>
+          </div>
+        )}
+      </dialog>
     </section>
   )
 }
