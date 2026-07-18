@@ -25,16 +25,16 @@ const projects = [
     demo: demoPath('nocturne'),
   },
   {
-    title: 'Forma',
-    type: { ru: 'Живой концепт архитектурного бюро', en: 'Interactive architecture studio concept' },
+    title: 'VP/Report',
+    type: { ru: 'Медиа о виртуальном продакшене', en: 'Virtual production publication' },
     image: imagePath('demo-forma.png'),
-    alt: { ru: 'Главный экран архитектурного бюро Forma', en: 'Forma architecture studio home screen' },
+    alt: { ru: 'Главный экран медиа VP/Report', en: 'VP/Report publication home screen' },
     className: '',
-    summary: { ru: 'Портфолио архитектурного бюро с крупными проектами, спокойным ритмом и ясной студийной позицией.', en: 'An architecture portfolio with large project views, a measured pace and a clear studio point of view.' },
-    challenge: { ru: 'Показать масштаб архитектуры и одновременно сделать навигацию по работам быстрой и ясной.', en: 'Show the scale of the work while keeping every project easy to find and understand.' },
-    solution: { ru: 'Крупные изображения, строгая сетка и холодный синий акцент оставляют главное внимание пространству.', en: 'Large images, a strict grid and a cool blue accent keep the focus on the spaces.' },
-    role: { ru: 'Арт-дирекшн, UX/UI, React-разработка', en: 'Art direction, UX/UI, React development' },
-    stack: 'Figma, React, CSS Grid',
+    summary: { ru: 'Светлое отраслевое медиа с главным материалом, лентой публикаций и простой формой подписки.', en: 'A light editorial publication with a leading story, article feed and a simple newsletter form.' },
+    challenge: { ru: 'Собрать много материалов в понятную структуру и сохранить визуальный вес главной новости.', en: 'Organise several stories while keeping the leading article visually dominant.' },
+    solution: { ru: 'Контрастная обложка, строгая журнальная сетка и синий акцент разделяют уровни контента.', en: 'A high-contrast cover, strict editorial grid and blue accent separate each content level.' },
+    role: { ru: 'Концепция, UX/UI, React-разработка', en: 'Concept, UX/UI, React development' },
+    stack: 'React, CSS Grid, Responsive UI',
     demo: demoPath('forma'),
   },
   {
@@ -49,6 +49,20 @@ const projects = [
     role: { ru: 'Концепция, UX/UI, React-разработка', en: 'Concept, UX/UI, React development' },
     stack: 'Figma, React, CSS Grid',
     demo: demoPath('aperture'),
+  },
+  {
+    title: 'Offset',
+    type: { ru: 'Интернет-магазин фотопринтов', en: 'Online photographic print store' },
+    image: imagePath('demo-store.png'),
+    alt: { ru: 'Главный экран интернет-магазина Offset', en: 'Offset online store home screen' },
+    className: 'project--wide',
+    summary: { ru: 'Небольшой магазин фотопринтов с каталогом, корзиной и демонстрационным входом в аккаунт.', en: 'A compact photographic print store with a catalogue, shopping bag and a demonstration account flow.' },
+    challenge: { ru: 'Сделать простой магазин, где товары легко просмотреть, добавить в корзину и открыть личный кабинет.', en: 'Build a simple store where products are easy to browse, add to a bag and view through an account flow.' },
+    solution: { ru: 'Холодная монохромная палитра, асимметричный каталог и короткие интерактивные сценарии.', en: 'A cold monochrome palette, asymmetric catalogue and short interactive flows keep the shop direct.' },
+    role: { ru: 'Концепция, UX/UI, React-разработка', en: 'Concept, UX/UI, React development' },
+    stack: 'React, State UI, CSS Grid',
+    demoNote: { ru: 'Функция-пример: вход работает только внутри браузера. Данные не сохраняются и не отправляются.', en: 'Example feature: sign-in works only inside the browser. No data is stored or sent.' },
+    demo: demoPath('offset'),
   },
 ]
 
@@ -116,7 +130,7 @@ const copy = {
     nav: { top: 'Главная', work: 'Работы', approach: 'Услуги', contact: 'Контакт' },
     aria: { home: 'На главную', navigation: 'Основная навигация', light: 'Включить светлую тему', dark: 'Включить тёмную тему', language: 'Switch to English', serviceChoice: 'Выбор услуги' },
     hero: { aria: 'Создаю сайты, в которые верят', lineOne: 'Создаю сайты,', lineTwoBefore: 'в которые', lineTwoAfter: 'верят', copyBefore: 'Дизайн, код и', copyAfter: 'для цифровых продуктов с характером.', work: 'Смотреть работы', contact: 'Обсудить проект' },
-    work: { eyebrow: 'Избранные работы', title: 'Три проекта с живыми демо.', text: 'Откройте любой проект, прокрутите страницу и проверьте адаптивную версию.', open: 'Открыть кейс', close: 'Закрыть кейс', challenge: 'Задача', solution: 'Решение', role: 'Моя роль', tools: 'Инструменты', demo: 'Открыть демо' },
+    work: { eyebrow: 'Избранные работы', title: 'Четыре проекта с живыми демо.', text: 'Откройте любой проект, прокрутите страницу и проверьте адаптивную версию.', open: 'Открыть кейс', close: 'Закрыть кейс', challenge: 'Задача', solution: 'Решение', role: 'Моя роль', tools: 'Инструменты', demo: 'Открыть демо' },
     services: { title: 'Что можно поручить мне.', text: 'Выберите задачу. Покажу состав работы и подходящий сценарий.', includes: 'В работу входит', fit: 'Подойдёт', discuss: 'Обсудить задачу' },
     story: [
       { title: 'Разобраться', text: 'Определяем аудиторию и действие, к которому ведёт страница.', result: 'Карта страницы' },
@@ -131,7 +145,7 @@ const copy = {
     nav: { top: 'Home', work: 'Work', approach: 'Services', contact: 'Contact' },
     aria: { home: 'Back to home', navigation: 'Main navigation', light: 'Use light theme', dark: 'Use dark theme', language: 'Переключить на русский', serviceChoice: 'Choose a service' },
     hero: { aria: 'I build websites people can trust', lineOne: 'I build websites', lineTwoBefore: 'people can', lineTwoAfter: 'trust.', copyBefore: 'Design, code and', copyAfter: 'for digital products with a point of view.', work: 'View selected work', contact: 'Start a project' },
-    work: { eyebrow: 'Selected work', title: 'Three projects. Three live demos.', text: 'Open a project, explore the page and try it at any screen size.', open: 'Open case study', close: 'Close case study', challenge: 'Challenge', solution: 'Solution', role: 'My role', tools: 'Tools', demo: 'Open live demo' },
+    work: { eyebrow: 'Selected work', title: 'Four projects. Four live demos.', text: 'Open a project, explore the page and try it at any screen size.', open: 'Open case study', close: 'Close case study', challenge: 'Challenge', solution: 'Solution', role: 'My role', tools: 'Tools', demo: 'Open live demo' },
     services: { title: 'What I can take off your plate.', text: 'Choose a task to see the scope and where it fits.', includes: 'What is included', fit: 'Best for', discuss: 'Discuss this project' },
     story: [
       { title: 'Get clear', text: 'Define the audience and the action each page should lead to.', result: 'Page map' },
@@ -320,6 +334,20 @@ function Header({ theme, setTheme, language, setLanguage, text }) {
 
 function Hero({ text }) {
   const root = useRef(null)
+  const [activeHeroItem, setActiveHeroItem] = useState(0)
+  const heroItems = [
+    { word: 'DESIGN', image: imagePath('demo-forma.png') },
+    { word: 'CODE', image: imagePath('demo-store.png') },
+    { word: 'MOTION', image: imagePath('demo-nocturne.png') },
+  ]
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
+    const interval = window.setInterval(() => {
+      setActiveHeroItem((index) => (index + 1) % heroItems.length)
+    }, 4000)
+    return () => window.clearInterval(interval)
+  }, [heroItems.length])
 
   useLayoutEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
@@ -338,7 +366,13 @@ function Hero({ text }) {
       <div className="hero-title" aria-label={text.aria}>
         <div className="hero-line"><span>{text.lineOne}</span></div>
         <div className="hero-line hero-line--offset">
-          <span>{text.lineTwoBefore} <i className="inline-image" style={{ backgroundImage: `url(${imagePath('principle-motion.jpg')})` }} aria-hidden="true" /> {text.lineTwoAfter}</span>
+          <span>
+            {text.lineTwoBefore}{' '}
+            <i className="hero-rotator" aria-hidden="true">
+              <b key={heroItems[activeHeroItem].word}>{heroItems[activeHeroItem].word}</b>
+            </i>{' '}
+            {text.lineTwoAfter}
+          </span>
         </div>
       </div>
       <div className="hero-bottom">
@@ -356,7 +390,10 @@ function Hero({ text }) {
           <a className="button button--secondary" href="#contact">{text.contact}</a>
         </div>
       </div>
-      <div className="hero-media" style={{ backgroundImage: `url(${imagePath('project-aperture.jpg')})` }} aria-hidden="true">
+      <div className="hero-media" aria-hidden="true">
+        {heroItems.map((item, index) => (
+          <img className={index === activeHeroItem ? 'is-active' : ''} src={item.image} alt="" key={item.word} />
+        ))}
         <div className="hero-media__veil" />
       </div>
     </section>
@@ -439,6 +476,7 @@ function Work({ language, text }) {
               <p className="project-dialog__type">{localized(selectedProject.type, language)}</p>
               <h3>{selectedProject.title}</h3>
               <p className="project-dialog__summary">{localized(selectedProject.summary, language)}</p>
+              {selectedProject.demoNote && <p className="project-dialog__note">{localized(selectedProject.demoNote, language)}</p>}
               <div className="project-dialog__facts">
                 <section>
                   <h4>{text.challenge}</h4>
