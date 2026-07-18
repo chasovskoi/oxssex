@@ -852,7 +852,7 @@ img {
 
 .testimonials-heading {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr);
   align-items: end;
   gap: 32px;
 }
@@ -865,16 +865,6 @@ img {
   line-height: 1;
   letter-spacing: -0.05em;
   text-wrap: balance;
-}
-
-.testimonials-note {
-  max-width: 220px;
-  margin: 0 0 6px;
-  color: var(--muted);
-  font-size: 0.75rem;
-  line-height: 1.35;
-  text-align: right;
-  text-wrap: pretty;
 }
 
 .testimonial-stage {
@@ -2087,12 +2077,6 @@ img {
     grid-template-columns: 1fr;
     align-items: start;
     gap: 18px;
-  }
-
-  .testimonials-note {
-    max-width: 280px;
-    margin: 0;
-    text-align: left;
   }
 
   .testimonial-card {

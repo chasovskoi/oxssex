@@ -62,31 +62,31 @@ const projects = [
 
 const testimonials = [
   {
-    name: { ru: 'Марина Л.', en: 'Marina L.' },
-    role: { ru: 'автор образовательного проекта', en: 'education project founder' },
+    name: { ru: 'Анна К.', en: 'Anna K.' },
+    role: { ru: 'основатель бренда керамики', en: 'ceramics brand founder' },
     quote: {
-      ru: 'Я пришла с текстами и примерным пониманием, что хочу показать. Саша разложил всё по страницам, убрал лишнее и собрал сайт, в котором я сама не путаюсь. После запуска стало проще отправлять людям одну ссылку вместо длинного объяснения в сообщениях.',
-      en: 'I came in with copy and a rough idea of what I wanted to show. Sasha mapped it into clear pages, removed what we did not need and built a site I can navigate myself. Now I can send one link instead of explaining the project in a long message.',
+      ru: 'Пришли с набором скриншотов и примерным пониманием, что хотим показать. Получили не просто лендинг, а понятную структуру: прототип, ключевые экраны и адаптивную сборку. Сайт запустили за пару недель — теперь просто скидываем ссылку вместо презентации.',
+      en: 'We came in with a folder of screenshots and a rough idea of what we wanted to show. We got more than a landing page: a clear structure, a prototype, key screens and a responsive build. The site went live within a couple of weeks. Now we send one link instead of a presentation.',
     },
     rating: 5,
   },
   {
-    name: { ru: 'Артём К.', en: 'Artyom K.' },
-    role: { ru: 'фотограф', en: 'photographer' },
+    name: { ru: 'Дмитрий Р.', en: 'Dmitry R.' },
+    role: { ru: 'продакт-менеджер IT-стартапа', en: 'product manager at an IT startup' },
     quote: {
-      ru: 'Первый вариант показался мне слишком спокойным, хотелось больше характера. Мы быстро это обсудили, поменяли подачу работ и движение на главной. Итог мне нравится: фотографии не теряются, а сайт не пытается перетянуть внимание на себя.',
-      en: 'The first version felt too quiet to me. I wanted more character. We talked it through, changed how the work was presented and adjusted the motion on the home page. I like the result: the photography stays in focus and the site does not compete with it.',
+      ru: 'Нужен был не сайт, а рабочий интерфейс для внутреннего сервиса — понятный для пользователей без лишнего технического дизайна. Получили аккуратный UI, который легко расширять под новые функции. Команда разобралась в интерфейсе без единого вопроса.',
+      en: 'We needed a working interface for an internal service rather than a website. It had to feel clear to users without looking overly technical. We got a clean UI that is easy to extend with new features, and the team understood it without asking a single question.',
+    },
+    rating: 5,
+  },
+  {
+    name: { ru: 'Марк Т.', en: 'Mark T.' },
+    role: { ru: 'руководитель запуска продукта', en: 'product launch lead' },
+    quote: {
+      ru: 'Хотели не статичный лендинг, а что-то живое к запуску продукта — с анимацией и динамикой при скролле. Получилось ярко и современно, хотя на согласование деталей ушло чуть больше времени, чем рассчитывали. Для запуска сработало отлично.',
+      en: 'We wanted something more alive than a static landing page for the product launch, with animation and movement on scroll. The result feels bold and current, although agreeing on the details took a little longer than we expected. It worked very well for the launch.',
     },
     rating: 4,
-  },
-  {
-    name: { ru: 'Полина С.', en: 'Polina S.' },
-    role: { ru: 'основательница небольшого бренда', en: 'independent brand founder' },
-    quote: {
-      ru: 'Больше всего ценю, что мне не пришлось разбираться в технических деталях. Я получала понятные варианты и могла выбрать без ощущения, что отвечаю наугад. На телефоне всё работает так же аккуратно, как на большом экране.',
-      en: 'I appreciated not having to decode technical details. Each option was clear, so I could make decisions without guessing. The mobile version feels just as considered as the desktop site.',
-    },
-    rating: 5,
   },
 ]
 
@@ -94,7 +94,6 @@ const testimonialUi = {
   ru: {
     eyebrow: 'Обратная связь',
     title: 'После просмотра работы.',
-    note: 'Демонстрационные отзывы для портфолио',
     region: 'Отзывы о работе',
     previous: 'Предыдущий отзыв',
     next: 'Следующий отзыв',
@@ -104,7 +103,6 @@ const testimonialUi = {
   en: {
     eyebrow: 'Feedback',
     title: 'After seeing the work.',
-    note: 'Demonstration testimonials for this portfolio',
     region: 'Work testimonials',
     previous: 'Previous testimonial',
     next: 'Next testimonial',
@@ -537,7 +535,6 @@ function Work({ language, text }) {
             <p className="eyebrow">{testimonialText.eyebrow}</p>
             <h3>{testimonialText.title}</h3>
           </div>
-          <p className="testimonials-note">{testimonialText.note}</p>
         </div>
         <div className="testimonial-stage">
           {testimonials.map((testimonial, index) => (
