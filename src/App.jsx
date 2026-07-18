@@ -101,8 +101,6 @@ function Header({ theme, setTheme }) {
     { id: 'approach', label: 'Услуги' },
     { id: 'contact', label: 'Контакт' },
   ]
-  const activeIndex = Math.max(0, navigation.findIndex((item) => item.id === activeSection))
-
   useEffect(() => {
     const sections = navigation
       .map((item) => document.getElementById(item.id))
@@ -193,9 +191,6 @@ function Header({ theme, setTheme }) {
         >
           {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
         </button>
-      </div>
-      <div className="header-progress" aria-hidden="true">
-        <span style={{ '--nav-index': activeIndex }} />
       </div>
     </header>
   )
@@ -291,8 +286,9 @@ function Work() {
             aria-label={`Открыть кейс ${project.title}`}
             key={project.title}
           >
-            <img src={project.image} alt={project.alt} loading="lazy" />
-            <div className="project-shade" />
+            <div className="project-visual">
+              <img src={project.image} alt={project.alt} loading="lazy" />
+            </div>
             <div className="project-meta">
               <div>
                 <h3>{project.title}</h3>
@@ -377,33 +373,36 @@ function Story() {
   const root = useRef(null)
 
   useLayoutEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const ctx = gsap.context(() => {
-      const cards = gsap.utils.toArray('.story-card')
-      cards.forEach((card, index) => {
-        if (index === cards.length - 1) return
-        ScrollTrigger.create({
-          trigger: card,
-          start: 'top top',
-          endTrigger: cards[cards.length - 1],
-          end: 'top top',
-          pin: true,
-          pinSpacing: false,
-        })
-        gsap.to(card.querySelector('.story-card__inner'), {
-          scale: 0.92,
-          opacity: 0.42,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: cards[index + 1],
-            start: 'top bottom',
+    const media = gsap.matchMedia()
+    media.add('(min-width: 901px) and (prefers-reduced-motion: no-preference)', () => {
+      const ctx = gsap.context(() => {
+        const cards = gsap.utils.toArray('.story-card')
+        cards.forEach((card, index) => {
+          if (index === cards.length - 1) return
+          ScrollTrigger.create({
+            trigger: card,
+            start: 'top top',
+            endTrigger: cards[cards.length - 1],
             end: 'top top',
-            scrub: true,
-          },
+            pin: true,
+            pinSpacing: false,
+          })
+          gsap.to(card.querySelector('.story-card__inner'), {
+            scale: 0.92,
+            opacity: 0.42,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: cards[index + 1],
+              start: 'top bottom',
+              end: 'top top',
+              scrub: true,
+            },
+          })
         })
-      })
-    }, root)
-    return () => ctx.revert()
+      }, root)
+      return () => ctx.revert()
+    })
+    return () => media.revert()
   }, [])
 
   const cards = [
