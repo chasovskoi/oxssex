@@ -10,6 +10,13 @@ const imagePath = (fileName) => `${import.meta.env.BASE_URL}images/${fileName}`
 const demoPath = (slug) => `${import.meta.env.BASE_URL}?demo=${slug}`
 const localized = (value, language) => value?.[language] ?? value
 
+function openService(event, id) {
+  event.preventDefault()
+  const hash = `#service-${id}`
+  window.history.pushState(null, '', hash)
+  window.dispatchEvent(new CustomEvent('service:open', { detail: id }))
+}
+
 const projects = [
   {
     title: 'Nocturne',
@@ -276,7 +283,8 @@ function Header({ theme, setTheme, language, setLanguage, text }) {
               {services.map((service, serviceIndex) => (
                 <a
                   href={`#service-${service.id}`}
-                  onClick={() => {
+                  onClick={(event) => {
+                    openService(event, service.id)
                     setActiveSection('approach')
                     setServicesOpen(false)
                   }}
@@ -492,19 +500,59 @@ function Work({ language, text }) {
 
 function Services({ language, text }) {
   const [active, setActive] = useState(0)
+  const detailRef = useRef(null)
   const activeService = services[active]
 
   useEffect(() => {
-    function selectServiceFromHash() {
-      const id = window.location.hash.replace('#service-', '')
+    function showService(id, shouldScroll = true) {
       const index = services.findIndex((service) => service.id === id)
-      if (index >= 0) setActive(index)
+      if (index < 0) return
+
+      setActive(index)
+      if (!shouldScroll) return
+
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        const detail = detailRef.current
+        if (!detail) return
+
+        const headerBottom = document.querySelector('.header')?.getBoundingClientRect().bottom ?? 0
+        const detailRect = detail.getBoundingClientRect()
+        const safeGap = window.innerWidth <= 760 ? 14 : 24
+        const availableHeight = window.innerHeight - headerBottom - safeGap * 2
+        const targetTop = detailRect.height <= availableHeight
+          ? headerBottom + safeGap + (availableHeight - detailRect.height) / 2
+          : headerBottom + safeGap
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+        window.scrollTo({
+          top: window.scrollY + detailRect.top - targetTop,
+          behavior: reducedMotion ? 'auto' : 'smooth',
+        })
+      }))
     }
 
-    selectServiceFromHash()
+    function selectServiceFromHash() {
+      showService(window.location.hash.replace('#service-', ''))
+    }
+
+    function selectServiceFromNavigation(event) {
+      showService(event.detail)
+    }
+
+    if (window.location.hash.startsWith('#service-')) selectServiceFromHash()
     window.addEventListener('hashchange', selectServiceFromHash)
-    return () => window.removeEventListener('hashchange', selectServiceFromHash)
+    window.addEventListener('service:open', selectServiceFromNavigation)
+    return () => {
+      window.removeEventListener('hashchange', selectServiceFromHash)
+      window.removeEventListener('service:open', selectServiceFromNavigation)
+    }
   }, [])
+
+  function selectFromList(index) {
+    const service = services[index]
+    window.history.pushState(null, '', `#service-${service.id}`)
+    window.dispatchEvent(new CustomEvent('service:open', { detail: service.id }))
+  }
 
   return (
     <section className="section services" id="approach" data-nav-section="approach">
@@ -517,11 +565,11 @@ function Services({ language, text }) {
           {services.map(({ id, title }, index) => (
           <button
             className={`service-option ${active === index ? 'is-active' : ''}`}
-            id={`service-${id}`}
+            id={`service-tab-${id}`}
             type="button"
             onMouseEnter={() => setActive(index)}
             onFocus={() => setActive(index)}
-            onClick={() => setActive(index)}
+            onClick={() => selectFromList(index)}
             key={id}
             role="tab"
             aria-selected={active === index}
@@ -535,8 +583,9 @@ function Services({ language, text }) {
         <article
           className="service-detail"
           id="service-detail"
+          ref={detailRef}
           role="tabpanel"
-          aria-labelledby={`service-${activeService.id}`}
+          aria-labelledby={`service-tab-${activeService.id}`}
           key={activeService.id}
         >
           <h3>{localized(activeService.shortTitle, language)}</h3>
@@ -735,7 +784,7 @@ function Contact({ language, text, footerText }) {
           <nav className="footer-column" aria-label={footerText.services}>
             <p>{footerText.services}</p>
             {services.map((service) => (
-              <a href={`#service-${service.id}`} key={service.id}>{localized(service.title, language)}</a>
+              <a href={`#service-${service.id}`} onClick={(event) => openService(event, service.id)} key={service.id}>{localized(service.title, language)}</a>
             ))}
           </nav>
           <nav className="footer-column" aria-label={footerText.navigation}>

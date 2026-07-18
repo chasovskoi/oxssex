@@ -1082,6 +1082,7 @@ img {
 }
 
 .service-detail {
+  scroll-margin-top: 96px;
   min-height: 510px;
   padding: clamp(30px, 4.5vw, 62px);
   display: flex;
@@ -1933,6 +1934,7 @@ img {
   }
 
   .service-detail {
+    scroll-margin-top: 132px;
     min-height: 0;
     padding: clamp(26px, 7vw, 46px);
   }
