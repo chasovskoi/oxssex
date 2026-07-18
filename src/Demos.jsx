@@ -5,7 +5,7 @@ import './demos.css'
 const baseUrl = import.meta.env.BASE_URL
 const imagePath = (fileName) => `${baseUrl}images/${fileName}`
 
-function DemoFrame({ className, title, children }) {
+function DemoFrame({ className, title, language, children }) {
   useEffect(() => {
     const previousTitle = document.title
     document.title = `${title} | oxssex demo`
@@ -16,14 +16,14 @@ function DemoFrame({ className, title, children }) {
     <main className={`demo ${className}`}>
       <a className="demo-back" href={`${baseUrl}#work`}>
         <ArrowLeft size={22} />
-        <span>Вернуться в портфолио</span>
+        <span>{language === 'en' ? 'Back to portfolio' : 'Вернуться в портфолио'}</span>
       </a>
       {children}
     </main>
   )
 }
 
-function NocturneDemo() {
+function NocturneDemo({ language }) {
   const [playing, setPlaying] = useState(false)
   const tracks = [
     ['Soft Static', 'Mira Vale'],
@@ -32,7 +32,7 @@ function NocturneDemo() {
   ]
 
   return (
-    <DemoFrame className="demo-nocturne" title="Nocturne">
+    <DemoFrame className="demo-nocturne" title="Nocturne" language={language}>
       <header className="demo-nav nocturne-nav">
         <a className="demo-brand" href="#top">Nocturne FM</a>
         <nav aria-label="Nocturne navigation">
@@ -79,14 +79,14 @@ function NocturneDemo() {
   )
 }
 
-function FormaDemo() {
+function FormaDemo({ language }) {
   const projects = [
     { name: 'Courtyard House', place: 'Ljubljana', image: 'project-aperture.jpg' },
     { name: 'River Archive', place: 'Salzburg', image: 'project-nocturne.jpg' },
   ]
 
   return (
-    <DemoFrame className="demo-forma" title="Forma">
+    <DemoFrame className="demo-forma" title="Forma" language={language}>
       <header className="demo-nav forma-nav">
         <a className="demo-brand" href="#top">FORMA</a>
         <nav aria-label="Forma navigation">
@@ -128,7 +128,7 @@ function FormaDemo() {
   )
 }
 
-function ApertureDemo() {
+function ApertureDemo({ language }) {
   const frames = [
     ['project-forma.jpg', 'Objects and memory'],
     ['principle-focus.jpg', 'Portraits in motion'],
@@ -136,7 +136,7 @@ function ApertureDemo() {
   ]
 
   return (
-    <DemoFrame className="demo-aperture" title="Aperture">
+    <DemoFrame className="demo-aperture" title="Aperture" language={language}>
       <header className="demo-nav aperture-nav">
         <a className="demo-brand" href="#top">APERTURE / STUDIO</a>
         <nav aria-label="Aperture navigation">
@@ -179,8 +179,8 @@ const demos = {
   aperture: ApertureDemo,
 }
 
-export function DemoProject({ slug }) {
+export function DemoProject({ slug, language }) {
   const Component = demos[slug]
-  if (!Component) return <NocturneDemo />
-  return <Component />
+  if (!Component) return <NocturneDemo language={language} />
+  return <Component language={language} />
 }

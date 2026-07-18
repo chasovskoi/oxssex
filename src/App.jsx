@@ -8,44 +8,45 @@ gsap.registerPlugin(ScrollTrigger)
 
 const imagePath = (fileName) => `${import.meta.env.BASE_URL}images/${fileName}`
 const demoPath = (slug) => `${import.meta.env.BASE_URL}?demo=${slug}`
+const localized = (value, language) => value?.[language] ?? value
 
 const projects = [
   {
     title: 'Nocturne',
-    type: 'Живой концепт музыкальной платформы',
+    type: { ru: 'Живой концепт музыкальной платформы', en: 'Interactive music platform concept' },
     image: imagePath('demo-nocturne.png'),
-    alt: 'Главный экран музыкальной платформы Nocturne',
+    alt: { ru: 'Главный экран музыкальной платформы Nocturne', en: 'Nocturne music platform home screen' },
     className: 'project--lead',
-    summary: 'Музыкальная платформа с вечерними подборками, встроенным проигрывателем и выразительной редакционной подачей.',
-    challenge: 'Сделать открытие новой музыки спокойным и последовательным, без перегруженных рекомендаций.',
-    solution: 'Контрастная типографика, управляемый плеер и программа эфира собирают понятный сценарий прослушивания.',
-    role: 'Концепция, UX/UI, React-разработка',
+    summary: { ru: 'Музыкальная платформа с вечерними подборками, встроенным проигрывателем и выразительной редакционной подачей.', en: 'A late-night music platform with curated sets, a built-in player and a strong editorial voice.' },
+    challenge: { ru: 'Сделать открытие новой музыки спокойным и последовательным, без перегруженных рекомендаций.', en: 'Make music discovery feel calm and deliberate, without a wall of recommendations.' },
+    solution: { ru: 'Контрастная типографика, управляемый плеер и программа эфира собирают понятный сценарий прослушивания.', en: 'Bold type, a focused player and a clear broadcast schedule create one simple listening flow.' },
+    role: { ru: 'Концепция, UX/UI, React-разработка', en: 'Concept, UX/UI, React development' },
     stack: 'React, Vite, GSAP, CSS',
     demo: demoPath('nocturne'),
   },
   {
     title: 'Forma',
-    type: 'Живой концепт архитектурного бюро',
+    type: { ru: 'Живой концепт архитектурного бюро', en: 'Interactive architecture studio concept' },
     image: imagePath('demo-forma.png'),
-    alt: 'Главный экран архитектурного бюро Forma',
+    alt: { ru: 'Главный экран архитектурного бюро Forma', en: 'Forma architecture studio home screen' },
     className: '',
-    summary: 'Портфолио архитектурного бюро с крупными проектами, спокойным ритмом и ясной студийной позицией.',
-    challenge: 'Показать масштаб архитектуры и одновременно сделать навигацию по работам быстрой и ясной.',
-    solution: 'Крупные изображения, строгая сетка и холодный синий акцент оставляют главное внимание пространству.',
-    role: 'Арт-дирекшн, UX/UI, React-разработка',
+    summary: { ru: 'Портфолио архитектурного бюро с крупными проектами, спокойным ритмом и ясной студийной позицией.', en: 'An architecture portfolio with large project views, a measured pace and a clear studio point of view.' },
+    challenge: { ru: 'Показать масштаб архитектуры и одновременно сделать навигацию по работам быстрой и ясной.', en: 'Show the scale of the work while keeping every project easy to find and understand.' },
+    solution: { ru: 'Крупные изображения, строгая сетка и холодный синий акцент оставляют главное внимание пространству.', en: 'Large images, a strict grid and a cool blue accent keep the focus on the spaces.' },
+    role: { ru: 'Арт-дирекшн, UX/UI, React-разработка', en: 'Art direction, UX/UI, React development' },
     stack: 'Figma, React, CSS Grid',
     demo: demoPath('forma'),
   },
   {
     title: 'Aperture',
-    type: 'Живой концепт фотостудии',
+    type: { ru: 'Живой концепт фотостудии', en: 'Interactive photography studio concept' },
     image: imagePath('demo-aperture.png'),
-    alt: 'Главный экран фотостудии Aperture',
+    alt: { ru: 'Главный экран фотостудии Aperture', en: 'Aperture photography studio home screen' },
     className: '',
-    summary: 'Сайт фотостудии с живой галереей, выразительным первым экраном и прямым сценарием бронирования.',
-    challenge: 'Соединить эмоциональную галерею с понятным коммерческим предложением и быстрым контактом.',
-    solution: 'Асимметричная галерея, тёмная палитра и мятный акцент превращают просмотр в цельную историю.',
-    role: 'Концепция, UX/UI, React-разработка',
+    summary: { ru: 'Сайт фотостудии с живой галереей, выразительным первым экраном и прямым сценарием бронирования.', en: 'A studio site with an expressive gallery, a memorable opening frame and a direct booking path.' },
+    challenge: { ru: 'Соединить эмоциональную галерею с понятным коммерческим предложением и быстрым контактом.', en: 'Pair an emotional image gallery with a clear offer and a fast route to booking.' },
+    solution: { ru: 'Асимметричная галерея, тёмная палитра и мятный акцент превращают просмотр в цельную историю.', en: 'An asymmetric gallery, dark palette and mint accent turn the work into a coherent visual story.' },
+    role: { ru: 'Концепция, UX/UI, React-разработка', en: 'Concept, UX/UI, React development' },
     stack: 'Figma, React, CSS Grid',
     demo: demoPath('aperture'),
   },
@@ -54,73 +55,94 @@ const projects = [
 const services = [
   {
     id: 'websites',
-    title: 'Разработка сайтов',
-    shortTitle: 'Сайты',
-    text: 'Проектирую лендинги и портфолио с понятной структурой и своим визуальным языком.',
-    includes: ['Структура и прототип', 'Дизайн ключевых экранов', 'Адаптивная React-сборка'],
-    fit: 'Для запуска услуги, продукта или личного бренда.',
+    title: { ru: 'Разработка сайтов', en: 'Website development' },
+    shortTitle: { ru: 'Сайты', en: 'Websites' },
+    text: { ru: 'Проектирую лендинги и портфолио с понятной структурой и своим визуальным языком.', en: 'I design landing pages and portfolios with a clear structure and a distinct visual language.' },
+    includes: { ru: ['Структура и прототип', 'Дизайн ключевых экранов', 'Адаптивная React-сборка'], en: ['Structure and wireframe', 'Key screen design', 'Responsive React build'] },
+    fit: { ru: 'Для запуска услуги, продукта или личного бренда.', en: 'For launching a service, product or personal brand.' },
   },
   {
     id: 'interfaces',
-    title: 'Веб-интерфейсы',
-    shortTitle: 'Интерфейсы',
-    text: 'Собираю экраны, в которых легко найти нужное действие и понять результат.',
-    includes: ['Карта сценариев', 'Компоненты и состояния', 'Кликабельный прототип'],
-    fit: 'Для личного кабинета, каталога или сложного пользовательского пути.',
+    title: { ru: 'Веб-интерфейсы', en: 'Web interfaces' },
+    shortTitle: { ru: 'Интерфейсы', en: 'Interfaces' },
+    text: { ru: 'Собираю экраны, в которых легко найти нужное действие и понять результат.', en: 'I build screens that make the next action and its result easy to understand.' },
+    includes: { ru: ['Карта сценариев', 'Компоненты и состояния', 'Кликабельный прототип'], en: ['User flow map', 'Components and states', 'Clickable prototype'] },
+    fit: { ru: 'Для личного кабинета, каталога или сложного пользовательского пути.', en: 'For dashboards, catalogues and complex user journeys.' },
   },
   {
     id: 'motion',
-    title: 'Motion-дизайн',
-    shortTitle: 'Motion',
-    text: 'Добавляю движение там, где оно объясняет иерархию, смену состояния или ход истории.',
-    includes: ['Микроанимации', 'Скролл-сцены', 'Состояния и переходы'],
-    fit: 'Для готового сайта, которому не хватает ритма и обратной связи.',
+    title: { ru: 'Motion-дизайн', en: 'Motion design' },
+    shortTitle: { ru: 'Motion', en: 'Motion' },
+    text: { ru: 'Добавляю движение там, где оно объясняет иерархию, смену состояния или ход истории.', en: 'I use motion to clarify hierarchy, changes of state and the rhythm of a story.' },
+    includes: { ru: ['Микроанимации', 'Скролл-сцены', 'Состояния и переходы'], en: ['Micro-interactions', 'Scroll sequences', 'States and transitions'] },
+    fit: { ru: 'Для готового сайта, которому не хватает ритма и обратной связи.', en: 'For an existing site that needs better rhythm and feedback.' },
   },
   {
     id: 'launch',
-    title: 'Запуск проекта',
-    shortTitle: 'Запуск',
-    text: 'Довожу готовый макет до публичной ссылки и проверяю его на реальных экранах.',
-    includes: ['Адаптивная верстка', 'Базовое SEO', 'Публикация и проверка'],
-    fit: 'Для макета в Figma, которому нужны код, домен и стабильная сборка.',
+    title: { ru: 'Запуск проекта', en: 'Project launch' },
+    shortTitle: { ru: 'Запуск', en: 'Launch' },
+    text: { ru: 'Довожу готовый макет до публичной ссылки и проверяю его на реальных экранах.', en: 'I turn a finished design into a live site and test it on real screens.' },
+    includes: { ru: ['Адаптивная верстка', 'Базовое SEO', 'Публикация и проверка'], en: ['Responsive development', 'Essential SEO', 'Deployment and testing'] },
+    fit: { ru: 'Для макета в Figma, которому нужны код, домен и стабильная сборка.', en: 'For a Figma design that needs code, a domain and a reliable build.' },
   },
 ]
 
 const principles = [
   {
-    title: 'Сначала смысл',
-    text: 'До макета фиксирую, кому нужен сайт, что человек должен понять и какое действие совершить.',
-    points: [
-      ['Кому', 'конкретный клиент'],
-      ['Что', 'одна мысль на экран'],
-      ['Действие', 'заявка, покупка или контакт'],
-    ],
-    outcome: 'На выходе: карта страницы и черновик текста.',
+    title: { ru: 'Сначала смысл', en: 'Meaning first' },
+    text: { ru: 'До макета фиксирую, кому нужен сайт, что человек должен понять и какое действие совершить.', en: 'Before drawing screens, I define who the site is for, what they need to understand and what they should do next.' },
+    points: { ru: [['Кому', 'конкретный клиент'], ['Что', 'одна мысль на экран'], ['Действие', 'заявка, покупка или контакт']], en: [['Audience', 'one specific customer'], ['Message', 'one idea per screen'], ['Action', 'enquiry, purchase or contact']] },
+    outcome: { ru: 'На выходе: карта страницы и черновик текста.', en: 'You get a page map and a working copy draft.' },
     image: imagePath('principle-focus.jpg'),
   },
   {
-    title: 'Движение по делу',
-    text: 'Анимирую только те моменты, где движение помогает человеку заметить главное и понять смену состояния.',
-    points: [
-      ['Иерархия', 'взгляд идёт к главному'],
-      ['Отклик', 'интерфейс отвечает на действие'],
-      ['Ритм', 'смена блоков не теряется'],
-    ],
-    outcome: 'На выходе: набор анимаций с понятной ролью.',
+    title: { ru: 'Движение по делу', en: 'Motion with a job' },
+    text: { ru: 'Анимирую только те моменты, где движение помогает человеку заметить главное и понять смену состояния.', en: 'I animate moments where movement helps people notice what matters or understand a change of state.' },
+    points: { ru: [['Иерархия', 'взгляд идёт к главному'], ['Отклик', 'интерфейс отвечает на действие'], ['Ритм', 'смена блоков не теряется']], en: [['Hierarchy', 'attention goes to what matters'], ['Feedback', 'the interface answers an action'], ['Rhythm', 'sections connect without getting lost']] },
+    outcome: { ru: 'На выходе: набор анимаций с понятной ролью.', en: 'You get a motion set where every effect has a purpose.' },
     image: imagePath('principle-motion.jpg'),
   },
   {
-    title: 'Готово к росту',
-    text: 'Собираю сайт из компонентов. Вы сможете добавить кейс, услугу или новый экран без переделки остальных разделов.',
-    points: [
-      ['Система', 'повторяемые компоненты'],
-      ['Контент', 'понятные места для замены'],
-      ['Проверка', 'телефон, клавиатура и быстрая загрузка'],
-    ],
-    outcome: 'На выходе: сайт, который не придётся собирать заново.',
+    title: { ru: 'Готово к росту', en: 'Built to grow' },
+    text: { ru: 'Собираю сайт из компонентов. Вы сможете добавить кейс, услугу или новый экран без переделки остальных разделов.', en: 'I build with reusable components, so a new case study, service or screen will not force a full rebuild.' },
+    points: { ru: [['Система', 'повторяемые компоненты'], ['Контент', 'понятные места для замены'], ['Проверка', 'телефон, клавиатура и быстрая загрузка']], en: [['System', 'reusable components'], ['Content', 'clear places to edit'], ['Testing', 'mobile, keyboard and fast loading']] },
+    outcome: { ru: 'На выходе: сайт, который не придётся собирать заново.', en: 'You get a site that can change without starting over.' },
     image: imagePath('project-forma.jpg'),
   },
 ]
+
+const copy = {
+  ru: {
+    nav: { top: 'Главная', work: 'Работы', approach: 'Услуги', contact: 'Контакт' },
+    aria: { home: 'На главную', navigation: 'Основная навигация', light: 'Включить светлую тему', dark: 'Включить тёмную тему', language: 'Switch to English', serviceChoice: 'Выбор услуги' },
+    hero: { aria: 'Создаю сайты, в которые верят', lineOne: 'Создаю сайты,', lineTwoBefore: 'в которые', lineTwoAfter: 'верят', copyBefore: 'Дизайн, код и', copyAfter: 'для цифровых продуктов с характером.', work: 'Смотреть работы', contact: 'Обсудить проект' },
+    work: { eyebrow: 'Избранные работы', title: 'Три проекта с живыми демо.', text: 'Откройте любой проект, прокрутите страницу и проверьте адаптивную версию.', open: 'Открыть кейс', close: 'Закрыть кейс', challenge: 'Задача', solution: 'Решение', role: 'Моя роль', tools: 'Инструменты', demo: 'Открыть демо' },
+    services: { title: 'Что можно поручить мне.', text: 'Выберите задачу. Покажу состав работы и подходящий сценарий.', includes: 'В работу входит', fit: 'Подойдёт', discuss: 'Обсудить задачу' },
+    story: [
+      { title: 'Разобраться', text: 'Определяем аудиторию и действие, к которому ведёт страница.', result: 'Карта страницы' },
+      { title: 'Найти характер', text: 'Выбираем типографику и ритм, затем настраиваем цвет и движение.', result: 'Визуальная система' },
+      { title: 'Собрать и запустить', text: 'Верстаем адаптивно, проверяем состояния и готовим сайт к реальному использованию.', result: 'Рабочая ссылка' },
+    ],
+    principles: { previous: 'Предыдущий принцип', next: 'Следующий принцип' },
+    contact: { eyebrow: 'Прямой контакт', titleOne: 'Удобный способ', titleTwo: 'связи.', text: 'Опишите задачу, сроки и референсы. Если технического задания пока нет, достаточно рассказать о цели своими словами.', name: 'Ваше имя', namePlaceholder: 'Как к вам обращаться', email: 'Ваша почта', brief: 'Что нужно сделать', briefPlaceholder: 'Коротко опишите задачу, сроки и референсы', consent: 'Я согласен на обработку данных для ответа на заявку.', sending: 'Отправляем...', submit: 'Отправить заявку', sendingStatus: 'Отправляем заявку...', success: 'Заявка отправлена. Я свяжусь с вами по email.', error: 'Не удалось отправить заявку. Напишите мне в Telegram.' },
+    footer: { description: 'Сайты, веб-интерфейсы и motion-дизайн для цифровых продуктов.', services: 'Услуги', navigation: 'Навигация', portfolio: 'Портфолио', approach: 'Подход', contacts: 'Контакты', privacy: 'Политика обработки данных', copyright: '© 2026 oxssex. Все права защищены.', close: 'Закрыть', privacyOne: 'Данные из формы используются только для ответа на заявку. Имя, email и описание проекта отправляются на почту владельца сайта через сервис FormSubmit.', privacyTwo: 'Данные не продаются и не используются для рекламных рассылок. Чтобы запросить удаление информации, напишите в Telegram @oxssex.' },
+  },
+  en: {
+    nav: { top: 'Home', work: 'Work', approach: 'Services', contact: 'Contact' },
+    aria: { home: 'Back to home', navigation: 'Main navigation', light: 'Use light theme', dark: 'Use dark theme', language: 'Переключить на русский', serviceChoice: 'Choose a service' },
+    hero: { aria: 'I build websites people can trust', lineOne: 'I build websites', lineTwoBefore: 'people can', lineTwoAfter: 'trust.', copyBefore: 'Design, code and', copyAfter: 'for digital products with a point of view.', work: 'View selected work', contact: 'Start a project' },
+    work: { eyebrow: 'Selected work', title: 'Three projects. Three live demos.', text: 'Open a project, explore the page and try it at any screen size.', open: 'Open case study', close: 'Close case study', challenge: 'Challenge', solution: 'Solution', role: 'My role', tools: 'Tools', demo: 'Open live demo' },
+    services: { title: 'What I can take off your plate.', text: 'Choose a task to see the scope and where it fits.', includes: 'What is included', fit: 'Best for', discuss: 'Discuss this project' },
+    story: [
+      { title: 'Get clear', text: 'Define the audience and the action each page should lead to.', result: 'Page map' },
+      { title: 'Find the voice', text: 'Set the type, pace, colour and motion until the product feels like itself.', result: 'Visual system' },
+      { title: 'Build and launch', text: 'Develop responsively, test real states and prepare the site for daily use.', result: 'Live website' },
+    ],
+    principles: { previous: 'Previous principle', next: 'Next principle' },
+    contact: { eyebrow: 'Direct contact', titleOne: 'A straightforward', titleTwo: 'way to talk.', text: 'Send the goal, timing and any references you have. No formal brief is required. A plain description is enough to start.', name: 'Your name', namePlaceholder: 'How should I address you?', email: 'Your email', brief: 'What do you need?', briefPlaceholder: 'Tell me about the project, timing and references', consent: 'I agree to the use of my details to reply to this enquiry.', sending: 'Sending...', submit: 'Send enquiry', sendingStatus: 'Sending your enquiry...', success: 'Message sent. I will reply by email.', error: 'The form did not send. Please message me on Telegram.' },
+    footer: { description: 'Websites, interfaces and motion design for digital products.', services: 'Services', navigation: 'Navigation', portfolio: 'Portfolio', approach: 'Approach', contacts: 'Contact', privacy: 'Data and privacy', copyright: '© 2026 oxssex. All rights reserved.', close: 'Close', privacyOne: 'Form details are used only to reply to your enquiry. Your name, email and project description are sent to the site owner through FormSubmit.', privacyTwo: 'Your details are not sold or used for marketing. To request deletion, message @oxssex on Telegram.' },
+  },
+}
 
 function useTheme() {
   const [theme, setTheme] = useState(() => {
@@ -137,15 +159,54 @@ function useTheme() {
   return [theme, setTheme]
 }
 
-function Header({ theme, setTheme }) {
+function useLanguage() {
+  const [language, setLanguage] = useState(() => localStorage.getItem('portfolio-language') === 'en' ? 'en' : 'ru')
+
+  useEffect(() => {
+    document.documentElement.lang = language
+    document.documentElement.dataset.language = language
+    if (!new URLSearchParams(window.location.search).has('demo')) {
+      document.title = language === 'ru' ? 'oxssex | Дизайн и разработка' : 'oxssex | Design and development'
+      document.querySelector('meta[name="description"]')?.setAttribute(
+        'content',
+        language === 'ru'
+          ? 'Портфолио независимого разработчика цифровых продуктов.'
+          : 'Independent designer and developer portfolio for digital products.',
+      )
+    }
+    localStorage.setItem('portfolio-language', language)
+  }, [language])
+
+  return [language, setLanguage]
+}
+
+function LanguageToggle({ language, setLanguage, label }) {
+  const nextLanguage = language === 'ru' ? 'en' : 'ru'
+
+  return (
+    <button
+      className="language-toggle"
+      type="button"
+      data-language={language}
+      onClick={() => setLanguage(nextLanguage)}
+      aria-label={label}
+    >
+      <span className="language-toggle__thumb" aria-hidden="true" />
+      <span className={language === 'ru' ? 'is-active' : ''}>RU</span>
+      <span className={language === 'en' ? 'is-active' : ''}>EN</span>
+    </button>
+  )
+}
+
+function Header({ theme, setTheme, language, setLanguage, text }) {
   const [activeSection, setActiveSection] = useState('top')
   const [servicesOpen, setServicesOpen] = useState(false)
   const servicesMenuRef = useRef(null)
   const navigation = [
-    { id: 'top', label: 'Главная' },
-    { id: 'work', label: 'Работы' },
-    { id: 'approach', label: 'Услуги' },
-    { id: 'contact', label: 'Контакт' },
+    { id: 'top', label: text.nav.top },
+    { id: 'work', label: text.nav.work },
+    { id: 'approach', label: text.nav.approach },
+    { id: 'contact', label: text.nav.contact },
   ]
   useEffect(() => {
     const sections = Array.from(document.querySelectorAll('[data-nav-section]'))
@@ -188,8 +249,8 @@ function Header({ theme, setTheme }) {
 
   return (
     <header className="header" onKeyDown={(event) => event.key === 'Escape' && setServicesOpen(false)}>
-      <a className="wordmark" href="#top" aria-label="На главную">oxssex</a>
-      <nav className="nav-index" aria-label="Основная навигация">
+      <a className="wordmark" href="#top" aria-label={text.aria.home}>oxssex</a>
+      <nav className="nav-index" aria-label={text.aria.navigation}>
         {navigation.map((item, index) => item.id === 'approach' ? (
           <div
             className="nav-services"
@@ -219,7 +280,7 @@ function Header({ theme, setTheme }) {
                   }}
                   key={service.id}
                 >
-                  <span>{service.title}</span>
+                  <span>{localized(service.title, language)}</span>
                   <small>{String(serviceIndex + 1).padStart(2, '0')}</small>
                 </a>
               ))}
@@ -243,11 +304,12 @@ function Header({ theme, setTheme }) {
           <TelegramLogo size={18} />
           <span>Telegram</span>
         </a>
+        <LanguageToggle language={language} setLanguage={setLanguage} label={text.aria.language} />
         <button
           className="theme-toggle"
           type="button"
           onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-          aria-label={theme === 'dark' ? 'Включить светлую тему' : 'Включить тёмную тему'}
+          aria-label={theme === 'dark' ? text.aria.light : text.aria.dark}
         >
           {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
         </button>
@@ -256,7 +318,7 @@ function Header({ theme, setTheme }) {
   )
 }
 
-function Hero() {
+function Hero({ text }) {
   const root = useRef(null)
 
   useLayoutEffect(() => {
@@ -273,25 +335,25 @@ function Hero() {
 
   return (
     <section className="hero" id="top" data-nav-section="top" ref={root}>
-      <div className="hero-title" aria-label="Создаю сайты, в которые верят">
-        <div className="hero-line"><span>Создаю сайты,</span></div>
+      <div className="hero-title" aria-label={text.aria}>
+        <div className="hero-line"><span>{text.lineOne}</span></div>
         <div className="hero-line hero-line--offset">
-          <span>в которые <i className="inline-image" style={{ backgroundImage: `url(${imagePath('principle-motion.jpg')})` }} aria-hidden="true" /> верят</span>
+          <span>{text.lineTwoBefore} <i className="inline-image" style={{ backgroundImage: `url(${imagePath('principle-motion.jpg')})` }} aria-hidden="true" /> {text.lineTwoAfter}</span>
         </div>
       </div>
       <div className="hero-bottom">
         <p className="hero-copy">
-          Дизайн, код и{' '}
+          {text.copyBefore}{' '}
           <span className="motion-word" aria-label="motion">
             {'motion'.split('').map((letter, index) => (
               <span className="motion-letter" style={{ '--letter-index': index }} aria-hidden="true" key={`${letter}-${index}`}>{letter}</span>
             ))}
           </span>{' '}
-          для цифровых продуктов с характером.
+          {text.copyAfter}
         </p>
         <div className="hero-actions">
-          <a className="button button--primary" href="#work">Смотреть работы <ArrowDownRight size={19} /></a>
-          <a className="button button--secondary" href="#contact">Обсудить проект</a>
+          <a className="button button--primary" href="#work">{text.work} <ArrowDownRight size={19} /></a>
+          <a className="button button--secondary" href="#contact">{text.contact}</a>
         </div>
       </div>
       <div className="hero-media" style={{ backgroundImage: `url(${imagePath('project-aperture.jpg')})` }} aria-hidden="true">
@@ -301,7 +363,7 @@ function Hero() {
   )
 }
 
-function Work() {
+function Work({ language, text }) {
   const root = useRef(null)
   const dialog = useRef(null)
   const [selectedProject, setSelectedProject] = useState(null)
@@ -334,25 +396,25 @@ function Work() {
 
   return (
     <section className="section work" id="work" data-nav-section="work" ref={root}>
-      <p className="eyebrow">Избранные работы</p>
-      <h2>Три проекта с живыми демо.</h2>
-      <p className="section-copy">Откройте любой проект, прокрутите страницу и проверьте адаптивную версию.</p>
+      <p className="eyebrow">{text.eyebrow}</p>
+      <h2>{text.title}</h2>
+      <p className="section-copy">{text.text}</p>
       <div className="project-grid">
         {projects.map((project) => (
           <button
             className={`project ${project.className}`}
             type="button"
             onClick={() => setSelectedProject(project)}
-            aria-label={`Открыть кейс ${project.title}`}
+            aria-label={`${text.open} ${project.title}`}
             key={project.title}
           >
             <div className="project-visual">
-              <img src={project.image} alt={project.alt} loading="lazy" />
+              <img src={project.image} alt={localized(project.alt, language)} loading="lazy" />
             </div>
             <div className="project-meta">
               <div>
                 <h3>{project.title}</h3>
-                <p>{project.type}</p>
+                <p>{localized(project.type, language)}</p>
               </div>
               <span className="project-arrow" aria-hidden="true"><ArrowDownRight size={22} /></span>
             </div>
@@ -367,32 +429,32 @@ function Work() {
       >
         {selectedProject && (
           <div className="project-dialog__panel">
-            <button className="project-dialog__close" type="button" onClick={closeProject} aria-label="Закрыть кейс">
+            <button className="project-dialog__close" type="button" onClick={closeProject} aria-label={text.close}>
               <X size={22} />
             </button>
             <div className="project-dialog__media">
-              <img src={selectedProject.image} alt={selectedProject.alt} />
+              <img src={selectedProject.image} alt={localized(selectedProject.alt, language)} />
             </div>
             <div className="project-dialog__content">
-              <p className="project-dialog__type">{selectedProject.type}</p>
+              <p className="project-dialog__type">{localized(selectedProject.type, language)}</p>
               <h3>{selectedProject.title}</h3>
-              <p className="project-dialog__summary">{selectedProject.summary}</p>
+              <p className="project-dialog__summary">{localized(selectedProject.summary, language)}</p>
               <div className="project-dialog__facts">
                 <section>
-                  <h4>Задача</h4>
-                  <p>{selectedProject.challenge}</p>
+                  <h4>{text.challenge}</h4>
+                  <p>{localized(selectedProject.challenge, language)}</p>
                 </section>
                 <section>
-                  <h4>Решение</h4>
-                  <p>{selectedProject.solution}</p>
+                  <h4>{text.solution}</h4>
+                  <p>{localized(selectedProject.solution, language)}</p>
                 </section>
               </div>
               <div className="project-dialog__footer">
-                <p><strong>Моя роль</strong><span>{selectedProject.role}</span></p>
-                <p><strong>Инструменты</strong><span>{selectedProject.stack}</span></p>
+                <p><strong>{text.role}</strong><span>{localized(selectedProject.role, language)}</span></p>
+                <p><strong>{text.tools}</strong><span>{selectedProject.stack}</span></p>
               </div>
               <a className="project-dialog__demo" href={selectedProject.demo} target="_blank" rel="noreferrer">
-                Открыть демо <ArrowDownRight size={20} />
+                {text.demo} <ArrowDownRight size={20} />
               </a>
             </div>
           </div>
@@ -402,7 +464,7 @@ function Work() {
   )
 }
 
-function Services() {
+function Services({ language, text }) {
   const [active, setActive] = useState(0)
   const activeService = services[active]
 
@@ -421,11 +483,11 @@ function Services() {
   return (
     <section className="section services" id="approach" data-nav-section="approach">
       <div className="services-heading">
-        <h2>Что можно поручить мне.</h2>
-        <p>Выберите задачу. Покажу состав работы и подходящий сценарий.</p>
+        <h2>{text.title}</h2>
+        <p>{text.text}</p>
       </div>
       <div className="service-composer">
-        <div className="service-list" role="tablist" aria-label="Выбор услуги">
+        <div className="service-list" role="tablist" aria-label={copy[language].aria.serviceChoice}>
           {services.map(({ id, title }, index) => (
           <button
             className={`service-option ${active === index ? 'is-active' : ''}`}
@@ -439,7 +501,7 @@ function Services() {
             aria-selected={active === index}
             aria-controls="service-detail"
           >
-            <span>{title}</span>
+            <span>{localized(title, language)}</span>
             <ArrowRight size={19} aria-hidden="true" />
           </button>
         ))}
@@ -451,28 +513,28 @@ function Services() {
           aria-labelledby={`service-${activeService.id}`}
           key={activeService.id}
         >
-          <h3>{activeService.shortTitle}</h3>
-          <p className="service-detail__lead">{activeService.text}</p>
+          <h3>{localized(activeService.shortTitle, language)}</h3>
+          <p className="service-detail__lead">{localized(activeService.text, language)}</p>
           <div className="service-detail__body">
             <section>
-              <h4>В работу входит</h4>
+              <h4>{text.includes}</h4>
               <ul>
-                {activeService.includes.map((item) => <li key={item}>{item}</li>)}
+                {localized(activeService.includes, language).map((item) => <li key={item}>{item}</li>)}
               </ul>
             </section>
             <section>
-              <h4>Подойдёт</h4>
-              <p>{activeService.fit}</p>
+              <h4>{text.fit}</h4>
+              <p>{localized(activeService.fit, language)}</p>
             </section>
           </div>
-          <a className="service-detail__link" href="#contact">Обсудить задачу <ArrowDownRight size={19} /></a>
+          <a className="service-detail__link" href="#contact">{text.discuss} <ArrowDownRight size={19} /></a>
         </article>
       </div>
     </section>
   )
 }
 
-function Story() {
+function Story({ cards }) {
   const root = useRef(null)
 
   useLayoutEffect(() => {
@@ -500,12 +562,6 @@ function Story() {
     return () => media.revert()
   }, [])
 
-  const cards = [
-    { title: 'Разобраться', text: 'Определяем аудиторию и действие, к которому ведёт страница.', result: 'Карта страницы' },
-    { title: 'Найти характер', text: 'Выбираем типографику и ритм, затем настраиваем цвет и движение.', result: 'Визуальная система' },
-    { title: 'Собрать и запустить', text: 'Верстаем адаптивно, проверяем состояния и готовим сайт к реальному использованию.', result: 'Рабочая ссылка' },
-  ]
-
   return (
     <section className="story" data-nav-section="approach" ref={root}>
       {cards.map(({ title, text, result }) => (
@@ -523,7 +579,7 @@ function Story() {
   )
 }
 
-function Principles() {
+function Principles({ language, text }) {
   const [active, setActive] = useState(0)
   const item = principles[active]
 
@@ -535,27 +591,27 @@ function Principles() {
             className={index === active ? 'is-active' : ''}
             src={principle.image}
             alt=""
-            key={principle.title}
+            key={principle.image}
           />
         ))}
       </div>
       <div className="principle-copy">
-        <h2>{item.title}</h2>
-        <p>{item.text}</p>
+        <h2>{localized(item.title, language)}</h2>
+        <p>{localized(item.text, language)}</p>
         <dl className="principle-points">
-          {item.points.map(([label, value]) => (
+          {localized(item.points, language).map(([label, value]) => (
             <div key={label}>
               <dt>{label}</dt>
               <dd>{value}</dd>
             </div>
           ))}
         </dl>
-        <p className="principle-outcome">{item.outcome}</p>
+        <p className="principle-outcome">{localized(item.outcome, language)}</p>
         <div className="carousel-controls">
-          <button type="button" onClick={() => setActive((active - 1 + principles.length) % principles.length)} aria-label="Предыдущий принцип">
+          <button type="button" onClick={() => setActive((active - 1 + principles.length) % principles.length)} aria-label={text.previous}>
             <ArrowLeft size={21} />
           </button>
-          <button type="button" onClick={() => setActive((active + 1) % principles.length)} aria-label="Следующий принцип">
+          <button type="button" onClick={() => setActive((active + 1) % principles.length)} aria-label={text.next}>
             <ArrowRight size={21} />
           </button>
         </div>
@@ -564,7 +620,7 @@ function Principles() {
   )
 }
 
-function Contact() {
+function Contact({ language, text, footerText }) {
   const [status, setStatus] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const privacyDialog = useRef(null)
@@ -574,7 +630,7 @@ function Contact() {
     const formElement = event.currentTarget
     const form = new FormData(formElement)
     setSubmitting(true)
-    setStatus('Отправляем заявку...')
+    setStatus(text.sendingStatus)
 
     try {
       const response = await fetch('https://formsubmit.co/ajax/chasovskoi.platon@gmail.com', {
@@ -588,7 +644,7 @@ function Contact() {
           email: form.get('email'),
           message: form.get('brief'),
           _replyto: form.get('email'),
-          _subject: 'Новая заявка с сайта oxssex',
+          _subject: language === 'ru' ? 'Новая заявка с сайта oxssex' : 'New enquiry from oxssex',
           _template: 'table',
           _honey: form.get('_honey'),
         }),
@@ -596,9 +652,9 @@ function Contact() {
       const result = await response.json()
       if (!response.ok || result.success === false) throw new Error('Submission failed')
       formElement.reset()
-      setStatus('Заявка отправлена. Я свяжусь с вами по email.')
+      setStatus(text.success)
     } catch {
-      setStatus('Не удалось отправить заявку. Напишите мне в Telegram.')
+      setStatus(text.error)
     } finally {
       setSubmitting(false)
     }
@@ -608,9 +664,9 @@ function Contact() {
     <footer className="contact" id="contact" data-nav-section="contact">
       <div className="contact-grid">
         <div className="contact-info">
-          <p className="contact-eyebrow">Прямой контакт</p>
-          <h2>Удобный способ<br />связи.</h2>
-          <p>Опишите задачу, сроки и референсы. Если технического задания пока нет, достаточно рассказать о цели своими словами.</p>
+          <p className="contact-eyebrow">{text.eyebrow}</p>
+          <h2>{text.titleOne}<br />{text.titleTwo}</h2>
+          <p>{text.text}</p>
           <a className="telegram-link" href="https://t.me/oxssex" target="_blank" rel="noreferrer">
             <TelegramLogo size={24} weight="regular" />
             Telegram @oxssex
@@ -619,26 +675,26 @@ function Contact() {
         <form className="contact-form" onSubmit={handleSubmit}>
           <div className="form-row">
             <label>
-              Ваше имя
-              <input name="name" placeholder="Как к вам обращаться" required />
+              {text.name}
+              <input name="name" placeholder={text.namePlaceholder} required />
             </label>
             <label>
-              Ваша почта
+              {text.email}
               <input name="email" type="email" placeholder="name@example.com" autoComplete="email" required />
             </label>
           </div>
           <label>
-            Что нужно сделать
-            <textarea name="brief" placeholder="Коротко опишите задачу, сроки и референсы" required rows="6" />
+            {text.brief}
+            <textarea name="brief" placeholder={text.briefPlaceholder} required rows="6" />
           </label>
           <label className="consent">
             <input type="checkbox" required />
-            <span>Я согласен на обработку данных для ответа на заявку.</span>
+            <span>{text.consent}</span>
           </label>
           <input className="form-honey" type="text" name="_honey" tabIndex="-1" autoComplete="off" />
           <button className="form-submit" type="submit" disabled={submitting}>
             <PaperPlaneTilt size={21} weight="regular" />
-            {submitting ? 'Отправляем...' : 'Отправить заявку'}
+            {submitting ? text.sending : text.submit}
           </button>
           <p className="form-status" aria-live="polite">{status}</p>
         </form>
@@ -647,54 +703,56 @@ function Contact() {
         <div className="footer-grid">
           <div className="footer-brand">
             <a href="#top">oxssex</a>
-            <p>Сайты, веб-интерфейсы и motion-дизайн для цифровых продуктов.</p>
+            <p>{footerText.description}</p>
             <a className="footer-telegram" href="https://t.me/oxssex" target="_blank" rel="noreferrer">Telegram</a>
           </div>
-          <nav className="footer-column" aria-label="Услуги">
-            <p>Услуги</p>
+          <nav className="footer-column" aria-label={footerText.services}>
+            <p>{footerText.services}</p>
             {services.map((service) => (
-              <a href={`#service-${service.id}`} key={service.id}>{service.title}</a>
+              <a href={`#service-${service.id}`} key={service.id}>{localized(service.title, language)}</a>
             ))}
           </nav>
-          <nav className="footer-column" aria-label="Навигация">
-            <p>Навигация</p>
-            <a href="#work">Портфолио</a>
-            <a href="#approach">Подход</a>
-            <a href="#contact">Контакты</a>
-            <button type="button" onClick={() => privacyDialog.current?.showModal()}>Политика обработки данных</button>
+          <nav className="footer-column" aria-label={footerText.navigation}>
+            <p>{footerText.navigation}</p>
+            <a href="#work">{footerText.portfolio}</a>
+            <a href="#approach">{footerText.approach}</a>
+            <a href="#contact">{footerText.contacts}</a>
+            <button type="button" onClick={() => privacyDialog.current?.showModal()}>{footerText.privacy}</button>
           </nav>
         </div>
-        <p className="footer-copyright">© 2026 oxssex. Все права защищены.</p>
+        <p className="footer-copyright">{footerText.copyright}</p>
       </div>
       <dialog className="privacy-dialog" ref={privacyDialog}>
         <div className="privacy-dialog__header">
-          <h2>Политика обработки данных</h2>
-          <button type="button" onClick={() => privacyDialog.current?.close()} aria-label="Закрыть">Закрыть</button>
+          <h2>{footerText.privacy}</h2>
+          <button type="button" onClick={() => privacyDialog.current?.close()} aria-label={footerText.close}>{footerText.close}</button>
         </div>
-        <p>Данные из формы используются только для ответа на заявку. Имя, email и описание проекта отправляются на почту владельца сайта через сервис FormSubmit.</p>
-        <p>Данные не продаются и не используются для рекламных рассылок. Чтобы запросить удаление информации, напишите в Telegram @oxssex.</p>
+        <p>{footerText.privacyOne}</p>
+        <p>{footerText.privacyTwo}</p>
       </dialog>
     </footer>
   )
 }
 
-function Portfolio() {
+function Portfolio({ language, setLanguage }) {
   const [theme, setTheme] = useTheme()
+  const text = copy[language]
 
   return (
-    <main>
-      <Header theme={theme} setTheme={setTheme} />
-      <Hero />
-      <Work />
-      <Services />
-      <Story />
-      <Principles />
-      <Contact />
+    <main className="portfolio-shell" data-language={language}>
+      <Header theme={theme} setTheme={setTheme} language={language} setLanguage={setLanguage} text={text} />
+      <Hero text={text.hero} />
+      <Work language={language} text={text.work} />
+      <Services language={language} text={text.services} />
+      <Story cards={text.story} />
+      <Principles language={language} text={text.principles} />
+      <Contact language={language} text={text.contact} footerText={text.footer} />
     </main>
   )
 }
 
 export default function App() {
+  const [language, setLanguage] = useLanguage()
   const demoSlug = new URLSearchParams(window.location.search).get('demo')
-  return demoSlug ? <DemoProject slug={demoSlug} /> : <Portfolio />
+  return demoSlug ? <DemoProject slug={demoSlug} language={language} /> : <Portfolio language={language} setLanguage={setLanguage} />
 }
