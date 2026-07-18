@@ -52,26 +52,72 @@ const projects = [
 ]
 
 const services = [
-  { id: 'websites', title: 'Разработка сайтов', shortTitle: 'Сайты', text: 'Лендинги и портфолио, которые выглядят дороже шаблонных решений.' },
-  { id: 'interfaces', title: 'Веб-интерфейсы', shortTitle: 'Интерфейсы', text: 'Продуктовые страницы с ясной логикой, сильным ритмом и живыми состояниями.' },
-  { id: 'motion', title: 'Motion-дизайн', shortTitle: 'Motion', text: 'Скролл-сцены и микроанимации, которые ведут взгляд и объясняют структуру.' },
-  { id: 'launch', title: 'Запуск проекта', shortTitle: 'Запуск', text: 'Адаптивная сборка, базовое SEO и подготовка проекта к публикации.' },
+  {
+    id: 'websites',
+    title: 'Разработка сайтов',
+    shortTitle: 'Сайты',
+    text: 'Проектирую лендинги и портфолио с понятной структурой и своим визуальным языком.',
+    includes: ['Структура и прототип', 'Дизайн ключевых экранов', 'Адаптивная React-сборка'],
+    fit: 'Для запуска услуги, продукта или личного бренда.',
+  },
+  {
+    id: 'interfaces',
+    title: 'Веб-интерфейсы',
+    shortTitle: 'Интерфейсы',
+    text: 'Собираю экраны, в которых легко найти нужное действие и понять результат.',
+    includes: ['Карта сценариев', 'Компоненты и состояния', 'Кликабельный прототип'],
+    fit: 'Для личного кабинета, каталога или сложного пользовательского пути.',
+  },
+  {
+    id: 'motion',
+    title: 'Motion-дизайн',
+    shortTitle: 'Motion',
+    text: 'Добавляю движение там, где оно объясняет иерархию, смену состояния или ход истории.',
+    includes: ['Микроанимации', 'Скролл-сцены', 'Состояния и переходы'],
+    fit: 'Для готового сайта, которому не хватает ритма и обратной связи.',
+  },
+  {
+    id: 'launch',
+    title: 'Запуск проекта',
+    shortTitle: 'Запуск',
+    text: 'Довожу готовый макет до публичной ссылки и проверяю его на реальных экранах.',
+    includes: ['Адаптивная верстка', 'Базовое SEO', 'Публикация и проверка'],
+    fit: 'Для макета в Figma, которому нужны код, домен и стабильная сборка.',
+  },
 ]
 
 const principles = [
   {
     title: 'Сначала смысл',
-    text: 'Каждая секция отвечает на один вопрос. Дизайн усиливает ответ, а не спорит с ним.',
+    text: 'До макета фиксирую, кому нужен сайт, что человек должен понять и какое действие совершить.',
+    points: [
+      ['Кому', 'конкретный клиент'],
+      ['Что', 'одна мысль на экран'],
+      ['Действие', 'заявка, покупка или контакт'],
+    ],
+    outcome: 'На выходе: карта страницы и черновик текста.',
     image: imagePath('principle-focus.jpg'),
   },
   {
     title: 'Движение по делу',
-    text: 'Анимация показывает иерархию, смену состояния и ход истории. Никакого визуального шума.',
+    text: 'Анимирую только те моменты, где движение помогает человеку заметить главное и понять смену состояния.',
+    points: [
+      ['Иерархия', 'взгляд идёт к главному'],
+      ['Отклик', 'интерфейс отвечает на действие'],
+      ['Ритм', 'смена блоков не теряется'],
+    ],
+    outcome: 'На выходе: набор анимаций с понятной ролью.',
     image: imagePath('principle-motion.jpg'),
   },
   {
     title: 'Готово к росту',
-    text: 'Компоненты и контент устроены так, чтобы новые кейсы добавлялись без полного редизайна.',
+    text: 'Собираю сайт из компонентов. Вы сможете добавить кейс, услугу или новый экран без переделки остальных разделов.',
+    points: [
+      ['Система', 'повторяемые компоненты'],
+      ['Контент', 'понятные места для замены'],
+      ['Проверка', 'телефон, клавиатура и быстрая загрузка'],
+    ],
+    outcome: 'На выходе: сайт, который не придётся собирать заново.',
     image: imagePath('project-forma.jpg'),
   },
 ]
@@ -102,20 +148,34 @@ function Header({ theme, setTheme }) {
     { id: 'contact', label: 'Контакт' },
   ]
   useEffect(() => {
-    const sections = navigation
-      .map((item) => document.getElementById(item.id))
-      .filter(Boolean)
+    const sections = Array.from(document.querySelectorAll('[data-nav-section]'))
+    const headerOffset = window.matchMedia('(max-width: 900px)').matches ? 106 : 72
+
+    function syncFromViewport() {
+      const marker = headerOffset + window.innerHeight * 0.22
+      const current = sections.filter((section) => section.getBoundingClientRect().top <= marker).at(-1)
+      setActiveSection((current || sections[0]).dataset.navSection)
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries
           .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
-        if (visible) setActiveSection(visible.target.id)
+          .sort((a, b) => Math.abs(a.boundingClientRect.top - headerOffset) - Math.abs(b.boundingClientRect.top - headerOffset))[0]
+        if (visible) setActiveSection(visible.target.dataset.navSection)
       },
-      { rootMargin: '-18% 0px -62% 0px', threshold: [0, 0.15, 0.4] },
+      { rootMargin: `-${headerOffset}px 0px -65% 0px`, threshold: 0 },
     )
     sections.forEach((section) => observer.observe(section))
-    return () => observer.disconnect()
+    const frame = requestAnimationFrame(syncFromViewport)
+    window.addEventListener('pageshow', syncFromViewport)
+    window.addEventListener('hashchange', syncFromViewport)
+    return () => {
+      cancelAnimationFrame(frame)
+      observer.disconnect()
+      window.removeEventListener('pageshow', syncFromViewport)
+      window.removeEventListener('hashchange', syncFromViewport)
+    }
   }, [])
 
   useEffect(() => {
@@ -212,7 +272,7 @@ function Hero() {
   }, [])
 
   return (
-    <section className="hero" id="top" ref={root}>
+    <section className="hero" id="top" data-nav-section="top" ref={root}>
       <div className="hero-title" aria-label="Создаю сайты, в которые верят">
         <div className="hero-line"><span>Создаю сайты,</span></div>
         <div className="hero-line hero-line--offset">
@@ -273,10 +333,10 @@ function Work() {
   }, [])
 
   return (
-    <section className="section work" id="work" ref={root}>
+    <section className="section work" id="work" data-nav-section="work" ref={root}>
       <p className="eyebrow">Избранные работы</p>
-      <h2>Не картинки. Работающие проекты.</h2>
-      <p className="section-copy">Три самостоятельных концепт-сайта. Каждый можно открыть, прокрутить и проверить на разных экранах.</p>
+      <h2>Три проекта с живыми демо.</h2>
+      <p className="section-copy">Откройте любой проект, прокрутите страницу и проверьте адаптивную версию.</p>
       <div className="project-grid">
         {projects.map((project) => (
           <button
@@ -344,26 +404,69 @@ function Work() {
 
 function Services() {
   const [active, setActive] = useState(0)
+  const activeService = services[active]
+
+  useEffect(() => {
+    function selectServiceFromHash() {
+      const id = window.location.hash.replace('#service-', '')
+      const index = services.findIndex((service) => service.id === id)
+      if (index >= 0) setActive(index)
+    }
+
+    selectServiceFromHash()
+    window.addEventListener('hashchange', selectServiceFromHash)
+    return () => window.removeEventListener('hashchange', selectServiceFromHash)
+  }, [])
 
   return (
-    <section className="section services" id="approach">
-      <h2>От идеи до работающей ссылки.</h2>
-      <div className="service-accordion">
-        {services.map(({ id, shortTitle: title, text }, index) => (
+    <section className="section services" id="approach" data-nav-section="approach">
+      <div className="services-heading">
+        <h2>Что можно поручить мне.</h2>
+        <p>Выберите задачу. Покажу состав работы и подходящий сценарий.</p>
+      </div>
+      <div className="service-composer">
+        <div className="service-list" role="tablist" aria-label="Выбор услуги">
+          {services.map(({ id, title }, index) => (
           <button
-            className={`service-panel ${active === index ? 'is-active' : ''}`}
+            className={`service-option ${active === index ? 'is-active' : ''}`}
             id={`service-${id}`}
             type="button"
             onMouseEnter={() => setActive(index)}
             onFocus={() => setActive(index)}
             onClick={() => setActive(index)}
             key={id}
-            aria-expanded={active === index}
+            role="tab"
+            aria-selected={active === index}
+            aria-controls="service-detail"
           >
-            <span className="service-title">{title}</span>
-            <span className="service-text">{text}</span>
+            <span>{title}</span>
+            <ArrowRight size={19} aria-hidden="true" />
           </button>
         ))}
+        </div>
+        <article
+          className="service-detail"
+          id="service-detail"
+          role="tabpanel"
+          aria-labelledby={`service-${activeService.id}`}
+          key={activeService.id}
+        >
+          <h3>{activeService.shortTitle}</h3>
+          <p className="service-detail__lead">{activeService.text}</p>
+          <div className="service-detail__body">
+            <section>
+              <h4>В работу входит</h4>
+              <ul>
+                {activeService.includes.map((item) => <li key={item}>{item}</li>)}
+              </ul>
+            </section>
+            <section>
+              <h4>Подойдёт</h4>
+              <p>{activeService.fit}</p>
+            </section>
+          </div>
+          <a className="service-detail__link" href="#contact">Обсудить задачу <ArrowDownRight size={19} /></a>
+        </article>
       </div>
     </section>
   )
@@ -406,13 +509,13 @@ function Story() {
   }, [])
 
   const cards = [
-    ['Разобраться', 'Собираем цель, аудиторию и одно действие, к которому ведёт страница.'],
-    ['Найти характер', 'Выбираем типографику, ритм, цвет и движение. Всё работает как одна система.'],
+    ['Разобраться', 'Определяем аудиторию и действие, к которому ведёт страница.'],
+    ['Найти характер', 'Выбираем типографику и ритм, затем настраиваем цвет и движение.'],
     ['Собрать и запустить', 'Верстаем адаптивно, проверяем состояния и готовим сайт к реальному использованию.'],
   ]
 
   return (
-    <section className="story" ref={root}>
+    <section className="story" data-nav-section="approach" ref={root}>
       {cards.map(([title, text]) => (
         <article className="story-card" key={title}>
           <div className="story-card__inner">
@@ -430,7 +533,7 @@ function Principles() {
   const item = principles[active]
 
   return (
-    <section className="section principles" aria-live="polite">
+    <section className="section principles" data-nav-section="approach" aria-live="polite">
       <div className="principle-media">
         {principles.map((principle, index) => (
           <img
@@ -444,6 +547,15 @@ function Principles() {
       <div className="principle-copy">
         <h2>{item.title}</h2>
         <p>{item.text}</p>
+        <dl className="principle-points">
+          {item.points.map(([label, value]) => (
+            <div key={label}>
+              <dt>{label}</dt>
+              <dd>{value}</dd>
+            </div>
+          ))}
+        </dl>
+        <p className="principle-outcome">{item.outcome}</p>
         <div className="carousel-controls">
           <button type="button" onClick={() => setActive((active - 1 + principles.length) % principles.length)} aria-label="Предыдущий принцип">
             <ArrowLeft size={21} />
@@ -498,7 +610,7 @@ function Contact() {
   }
 
   return (
-    <footer className="contact" id="contact">
+    <footer className="contact" id="contact" data-nav-section="contact">
       <div className="contact-grid">
         <div className="contact-info">
           <p className="contact-eyebrow">Прямой контакт</p>
