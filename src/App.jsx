@@ -2,63 +2,52 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { ArrowDownRight, ArrowLeft, ArrowRight, CaretDown, Moon, Sun, PaperPlaneTilt, TelegramLogo, X } from '@phosphor-icons/react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { DemoProject } from './Demos'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const imagePath = (fileName) => `${import.meta.env.BASE_URL}images/${fileName}`
+const demoPath = (slug) => `${import.meta.env.BASE_URL}?demo=${slug}`
 
 const projects = [
   {
-    title: 'oxssex',
-    type: 'Персональное портфолио',
-    year: '2026',
-    image: imagePath('project-oxssex.png'),
-    alt: 'Меню услуг в портфолио oxssex',
-    className: 'project--lead',
-    summary: 'Личный сайт, который показывает специализацию, процесс и характер работы до первого сообщения.',
-    challenge: 'Собрать услуги, кейсы и прямой контакт на одной странице, не превращая портфолио в каталог.',
-    solution: 'Крупная типографика, живые состояния и motion-сцены ведут пользователя от знакомства к заявке.',
-    role: 'Стратегия, UX/UI, React-разработка',
-    stack: 'React, Vite, GSAP, CSS',
-  },
-  {
     title: 'Nocturne',
-    type: 'Концепт музыкальной платформы',
-    year: '2026',
-    image: imagePath('project-nocturne.jpg'),
-    alt: 'Панорама города для визуального направления Nocturne',
-    className: '',
-    summary: 'Атмосферный интерфейс для музыкальных подборок, где настроение важнее количества элементов.',
-    challenge: 'Дать музыке визуальный ритм и сохранить простой путь от открытия подборки до прослушивания.',
-    solution: 'Контрастная композиция, монохромная фотография и спокойная анимация создают цельный сценарий.',
-    role: 'Концепция, арт-дирекшн, прототип',
-    stack: 'Figma, React, GSAP',
+    type: 'Живой концепт музыкальной платформы',
+    image: imagePath('demo-nocturne.png'),
+    alt: 'Главный экран музыкальной платформы Nocturne',
+    className: 'project--lead',
+    summary: 'Музыкальная платформа с вечерними подборками, встроенным проигрывателем и выразительной редакционной подачей.',
+    challenge: 'Сделать открытие новой музыки спокойным и последовательным, без перегруженных рекомендаций.',
+    solution: 'Контрастная типографика, управляемый плеер и программа эфира собирают понятный сценарий прослушивания.',
+    role: 'Концепция, UX/UI, React-разработка',
+    stack: 'React, Vite, GSAP, CSS',
+    demo: demoPath('nocturne'),
   },
   {
     title: 'Forma',
-    type: 'Концепт архитектурного бюро',
-    year: '2026',
-    image: imagePath('project-aperture.jpg'),
-    alt: 'Архитектура исторического здания для проекта Forma',
+    type: 'Живой концепт архитектурного бюро',
+    image: imagePath('demo-forma.png'),
+    alt: 'Главный экран архитектурного бюро Forma',
     className: '',
-    summary: 'Сдержанный сайт бюро, в котором проекты читаются как пространство, а не как набор карточек.',
+    summary: 'Портфолио архитектурного бюро с крупными проектами, спокойным ритмом и ясной студийной позицией.',
     challenge: 'Показать масштаб архитектуры и одновременно сделать навигацию по работам быстрой и ясной.',
-    solution: 'Вертикальный ритм, крупные кадры и минимум интерфейсного шума оставляют внимание проектам.',
-    role: 'UX/UI, визуальная система, frontend',
+    solution: 'Крупные изображения, строгая сетка и холодный синий акцент оставляют главное внимание пространству.',
+    role: 'Арт-дирекшн, UX/UI, React-разработка',
     stack: 'Figma, React, CSS Grid',
+    demo: demoPath('forma'),
   },
   {
     title: 'Aperture',
-    type: 'Концепт сайта фотостудии',
-    year: '2026',
-    image: imagePath('project-forma.jpg'),
-    alt: 'Плёночные камеры для проекта Aperture',
+    type: 'Живой концепт фотостудии',
+    image: imagePath('demo-aperture.png'),
+    alt: 'Главный экран фотостудии Aperture',
     className: '',
-    summary: 'Портфолио фотостудии с акцентом на серии работ, фактуру плёнки и уверенную подачу услуг.',
+    summary: 'Сайт фотостудии с живой галереей, выразительным первым экраном и прямым сценарием бронирования.',
     challenge: 'Соединить эмоциональную галерею с понятным коммерческим предложением и быстрым контактом.',
-    solution: 'Асимметричная сетка и тактильные переходы превращают просмотр работ в короткую визуальную историю.',
-    role: 'Концепция, UX/UI, motion',
-    stack: 'Figma, React, GSAP',
+    solution: 'Асимметричная галерея, тёмная палитра и мятный акцент превращают просмотр в цельную историю.',
+    role: 'Концепция, UX/UI, React-разработка',
+    stack: 'Figma, React, CSS Grid',
+    demo: demoPath('aperture'),
   },
 ]
 
@@ -291,8 +280,8 @@ function Work() {
   return (
     <section className="section work" id="work" ref={root}>
       <p className="eyebrow">Избранные работы</p>
-      <h2>Проекты, которым есть что сказать.</h2>
-      <p className="section-copy">Один запущенный проект и три концепта, в которых видно мой подход к структуре, визуалу и движению.</p>
+      <h2>Не картинки. Работающие проекты.</h2>
+      <p className="section-copy">Три самостоятельных концепт-сайта. Каждый можно открыть, прокрутить и проверить на разных экранах.</p>
       <div className="project-grid">
         {projects.map((project) => (
           <button
@@ -307,7 +296,7 @@ function Work() {
             <div className="project-meta">
               <div>
                 <h3>{project.title}</h3>
-                <p>{project.type} <span aria-hidden="true">/</span> {project.year}</p>
+                <p>{project.type}</p>
               </div>
               <span className="project-arrow" aria-hidden="true"><ArrowDownRight size={22} /></span>
             </div>
@@ -329,7 +318,7 @@ function Work() {
               <img src={selectedProject.image} alt={selectedProject.alt} />
             </div>
             <div className="project-dialog__content">
-              <p className="project-dialog__type">{selectedProject.type} / {selectedProject.year}</p>
+              <p className="project-dialog__type">{selectedProject.type}</p>
               <h3>{selectedProject.title}</h3>
               <p className="project-dialog__summary">{selectedProject.summary}</p>
               <div className="project-dialog__facts">
@@ -346,6 +335,9 @@ function Work() {
                 <p><strong>Моя роль</strong><span>{selectedProject.role}</span></p>
                 <p><strong>Инструменты</strong><span>{selectedProject.stack}</span></p>
               </div>
+              <a className="project-dialog__demo" href={selectedProject.demo} target="_blank" rel="noreferrer">
+                Открыть демо <ArrowDownRight size={20} />
+              </a>
             </div>
           </div>
         )}
@@ -580,7 +572,7 @@ function Contact() {
   )
 }
 
-export default function App() {
+function Portfolio() {
   const [theme, setTheme] = useTheme()
 
   return (
@@ -594,4 +586,9 @@ export default function App() {
       <Contact />
     </main>
   )
+}
+
+export default function App() {
+  const demoSlug = new URLSearchParams(window.location.search).get('demo')
+  return demoSlug ? <DemoProject slug={demoSlug} /> : <Portfolio />
 }

@@ -2,7 +2,7 @@ node_modules/
 dist/
 *.log
 *.png
-!public/images/project-oxssex.png
+!public/images/demo-*.png
 .qa
 .env
 .env.local

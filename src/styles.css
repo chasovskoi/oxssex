@@ -476,13 +476,13 @@ img {
 .project-grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-auto-rows: clamp(300px, 36vw, 520px);
   gap: 12px;
 }
 
 .project {
   position: relative;
-  grid-column: span 5;
+  grid-column: span 6;
+  aspect-ratio: 16 / 10;
   min-height: 0;
   padding: 0;
   overflow: hidden;
@@ -496,15 +496,16 @@ img {
 }
 
 .project--lead {
-  grid-column: span 7;
+  grid-column: 1 / -1;
+  aspect-ratio: 16 / 10;
+}
+
+.project:nth-child(2) {
+  grid-column: span 6;
 }
 
 .project:nth-child(3) {
-  grid-column: span 5;
-}
-
-.project:nth-child(4) {
-  grid-column: span 7;
+  grid-column: span 6;
 }
 
 .project:focus-visible {
@@ -516,6 +517,7 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top center;
   filter: saturate(0.65) contrast(1.05);
   transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1), filter 500ms ease;
 }
@@ -736,6 +738,30 @@ img {
   color: var(--muted);
 }
 
+.project-dialog__demo {
+  width: fit-content;
+  min-height: 50px;
+  margin-top: 30px;
+  padding: 0 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-text);
+  white-space: nowrap;
+  transition: transform 250ms ease, filter 250ms ease;
+}
+
+.project-dialog__demo:hover {
+  filter: brightness(1.06);
+  transform: translateY(-2px);
+}
+
+.project-dialog__demo:active {
+  transform: scale(0.98);
+}
+
 .services h2 {
   max-width: 760px;
   margin-bottom: 70px;
@@ -820,6 +846,7 @@ img {
   padding: 18px 24px;
   display: flex;
   align-items: center;
+  overflow: hidden;
   background: var(--bg);
 }
 
@@ -1343,10 +1370,11 @@ img {
 
   .project,
   .project--lead,
+  .project:nth-child(2),
   .project:nth-child(3),
   .project:nth-child(4) {
     grid-column: auto;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 10;
   }
 
   .project-dialog__panel {
