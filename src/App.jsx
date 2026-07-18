@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { ArrowDownRight, ArrowLeft, ArrowRight, CaretDown, Moon, Sun, PaperPlaneTilt, TelegramLogo, X } from '@phosphor-icons/react'
+import { ArrowDownRight, ArrowLeft, ArrowRight, CaretDown, Moon, Star, Sun, PaperPlaneTilt, TelegramLogo, X } from '@phosphor-icons/react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { DemoProject } from './Demos'
@@ -59,6 +59,59 @@ const projects = [
     demo: demoPath('offset'),
   },
 ]
+
+const testimonials = [
+  {
+    name: { ru: 'Марина Л.', en: 'Marina L.' },
+    role: { ru: 'автор образовательного проекта', en: 'education project founder' },
+    quote: {
+      ru: 'Я пришла с текстами и примерным пониманием, что хочу показать. Саша разложил всё по страницам, убрал лишнее и собрал сайт, в котором я сама не путаюсь. После запуска стало проще отправлять людям одну ссылку вместо длинного объяснения в сообщениях.',
+      en: 'I came in with copy and a rough idea of what I wanted to show. Sasha mapped it into clear pages, removed what we did not need and built a site I can navigate myself. Now I can send one link instead of explaining the project in a long message.',
+    },
+    rating: 5,
+  },
+  {
+    name: { ru: 'Артём К.', en: 'Artyom K.' },
+    role: { ru: 'фотограф', en: 'photographer' },
+    quote: {
+      ru: 'Первый вариант показался мне слишком спокойным, хотелось больше характера. Мы быстро это обсудили, поменяли подачу работ и движение на главной. Итог мне нравится: фотографии не теряются, а сайт не пытается перетянуть внимание на себя.',
+      en: 'The first version felt too quiet to me. I wanted more character. We talked it through, changed how the work was presented and adjusted the motion on the home page. I like the result: the photography stays in focus and the site does not compete with it.',
+    },
+    rating: 4,
+  },
+  {
+    name: { ru: 'Полина С.', en: 'Polina S.' },
+    role: { ru: 'основательница небольшого бренда', en: 'independent brand founder' },
+    quote: {
+      ru: 'Больше всего ценю, что мне не пришлось разбираться в технических деталях. Я получала понятные варианты и могла выбрать без ощущения, что отвечаю наугад. На телефоне всё работает так же аккуратно, как на большом экране.',
+      en: 'I appreciated not having to decode technical details. Each option was clear, so I could make decisions without guessing. The mobile version feels just as considered as the desktop site.',
+    },
+    rating: 5,
+  },
+]
+
+const testimonialUi = {
+  ru: {
+    eyebrow: 'Обратная связь',
+    title: 'После просмотра работы.',
+    note: 'Демонстрационные отзывы для портфолио',
+    region: 'Отзывы о работе',
+    previous: 'Предыдущий отзыв',
+    next: 'Следующий отзыв',
+    rating: (value) => `${value} из 5`,
+    choose: (index) => `Показать отзыв ${index + 1}`,
+  },
+  en: {
+    eyebrow: 'Feedback',
+    title: 'After seeing the work.',
+    note: 'Demonstration testimonials for this portfolio',
+    region: 'Work testimonials',
+    previous: 'Previous testimonial',
+    next: 'Next testimonial',
+    rating: (value) => `${value} out of 5`,
+    choose: (index) => `Show testimonial ${index + 1}`,
+  },
+}
 
 const services = [
   {
@@ -400,6 +453,9 @@ function Work({ language, text }) {
   const root = useRef(null)
   const dialog = useRef(null)
   const [selectedProject, setSelectedProject] = useState(null)
+  const [testimonialIndex, setTestimonialIndex] = useState(0)
+  const [testimonialsPaused, setTestimonialsPaused] = useState(false)
+  const testimonialText = testimonialUi[language]
 
   useEffect(() => {
     if (!selectedProject || dialog.current?.open) return
@@ -426,6 +482,18 @@ function Work({ language, text }) {
     }, root)
     return () => ctx.revert()
   }, [])
+
+  useEffect(() => {
+    if (testimonialsPaused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
+    const timer = window.setInterval(() => {
+      setTestimonialIndex((current) => (current + 1) % testimonials.length)
+    }, 5600)
+    return () => window.clearInterval(timer)
+  }, [testimonialsPaused, testimonialIndex])
+
+  function showTestimonial(index) {
+    setTestimonialIndex((index + testimonials.length) % testimonials.length)
+  }
 
   return (
     <section className="section work" id="work" data-nav-section="work" ref={root}>
@@ -454,6 +522,73 @@ function Work({ language, text }) {
           </button>
         ))}
       </div>
+      <section
+        className="testimonials"
+        aria-label={testimonialText.region}
+        onMouseEnter={() => setTestimonialsPaused(true)}
+        onMouseLeave={() => setTestimonialsPaused(false)}
+        onFocusCapture={() => setTestimonialsPaused(true)}
+        onBlurCapture={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget)) setTestimonialsPaused(false)
+        }}
+      >
+        <div className="testimonials-heading">
+          <div>
+            <p className="eyebrow">{testimonialText.eyebrow}</p>
+            <h3>{testimonialText.title}</h3>
+          </div>
+          <p className="testimonials-note">{testimonialText.note}</p>
+        </div>
+        <div className="testimonial-stage">
+          {testimonials.map((testimonial, index) => (
+            <article
+              className={`testimonial-card ${testimonialIndex === index ? 'is-active' : ''}`}
+              aria-hidden={testimonialIndex !== index}
+              key={localized(testimonial.name, language)}
+            >
+              <div className="testimonial-rating" aria-label={testimonialText.rating(testimonial.rating)}>
+                {Array.from({ length: 5 }, (_, starIndex) => (
+                  <Star
+                    size={20}
+                    weight={starIndex < testimonial.rating ? 'fill' : 'regular'}
+                    aria-hidden="true"
+                    key={starIndex}
+                  />
+                ))}
+                <span>{testimonial.rating}/5</span>
+              </div>
+              <blockquote>“{localized(testimonial.quote, language)}”</blockquote>
+              <footer>
+                <strong>{localized(testimonial.name, language)}</strong>
+                <span>{localized(testimonial.role, language)}</span>
+              </footer>
+            </article>
+          ))}
+        </div>
+        <div className="testimonial-controls">
+          <div className="testimonial-pagination" aria-label={testimonialText.region}>
+            {testimonials.map((testimonial, index) => (
+              <button
+                className={testimonialIndex === index ? 'is-active' : ''}
+                type="button"
+                onClick={() => showTestimonial(index)}
+                aria-label={testimonialText.choose(index)}
+                aria-current={testimonialIndex === index ? 'true' : undefined}
+                key={localized(testimonial.name, language)}
+              ><span /></button>
+            ))}
+          </div>
+          <div className="testimonial-arrows">
+            <button type="button" onClick={() => showTestimonial(testimonialIndex - 1)} aria-label={testimonialText.previous}>
+              <ArrowLeft size={20} />
+            </button>
+            <span><b>{String(testimonialIndex + 1).padStart(2, '0')}</b> / {String(testimonials.length).padStart(2, '0')}</span>
+            <button type="button" onClick={() => showTestimonial(testimonialIndex + 1)} aria-label={testimonialText.next}>
+              <ArrowRight size={20} />
+            </button>
+          </div>
+        </div>
+      </section>
       <dialog
         className="project-dialog"
         ref={dialog}
