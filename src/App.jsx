@@ -148,8 +148,9 @@ const copy = {
 function useTheme() {
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem('portfolio-theme')
-    if (saved) return saved
-    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+    const initialTheme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+    document.documentElement.dataset.theme = initialTheme
+    return initialTheme
   })
 
   useEffect(() => {
@@ -776,8 +777,76 @@ function Portfolio({ language, setLanguage }) {
   )
 }
 
+function SiteLoader({ language, phase }) {
+  if (phase === 'done') return null
+
+  return (
+    <div
+      className={`site-loader${phase === 'leaving' ? ' is-leaving' : ''}`}
+      role="status"
+      aria-live="polite"
+      aria-label={language === 'en' ? 'Loading site' : 'Загрузка сайта'}
+    >
+      <div className="site-loader__word" aria-hidden="true">
+        {'oxssex'.split('').map((letter, index) => (
+          <span className="site-loader__letter" style={{ '--loader-index': index }} key={`${letter}-${index}`}>
+            {letter}
+          </span>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export default function App() {
   const [language, setLanguage] = useLanguage()
+  const [loaderPhase, setLoaderPhase] = useState('visible')
   const demoSlug = new URLSearchParams(window.location.search).get('demo')
-  return demoSlug ? <DemoProject slug={demoSlug} language={language} /> : <Portfolio language={language} setLanguage={setLanguage} />
+
+  useEffect(() => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const startedAt = performance.now()
+    const minimumDuration = reducedMotion ? 120 : 1050
+    const exitDuration = reducedMotion ? 40 : 720
+    let exitStarted = false
+    let leaveTimer
+    let removeTimer
+
+    const beginExit = () => {
+      if (exitStarted) return
+      exitStarted = true
+      const delay = Math.max(0, minimumDuration - (performance.now() - startedAt))
+      leaveTimer = window.setTimeout(() => {
+        setLoaderPhase('leaving')
+        removeTimer = window.setTimeout(() => setLoaderPhase('done'), exitDuration)
+      }, delay)
+    }
+
+    const fallbackTimer = window.setTimeout(beginExit, reducedMotion ? 180 : 2800)
+    if (document.readyState === 'complete') beginExit()
+    else window.addEventListener('load', beginExit, { once: true })
+
+    return () => {
+      window.removeEventListener('load', beginExit)
+      window.clearTimeout(fallbackTimer)
+      window.clearTimeout(leaveTimer)
+      window.clearTimeout(removeTimer)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (loaderPhase === 'done') return undefined
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [loaderPhase])
+
+  return (
+    <>
+      {demoSlug ? <DemoProject slug={demoSlug} language={language} /> : <Portfolio language={language} setLanguage={setLanguage} />}
+      <SiteLoader language={language} phase={loaderPhase} />
+    </>
+  )
 }
