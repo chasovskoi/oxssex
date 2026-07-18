@@ -12,19 +12,21 @@
 .demo-back {
   position: fixed;
   z-index: 10;
-  right: 20px;
-  bottom: 20px;
-  min-height: 46px;
-  padding: 0 18px;
+  right: 28px;
+  bottom: 28px;
+  min-height: 64px;
+  padding: 0 28px;
   display: inline-flex;
   align-items: center;
-  gap: 9px;
+  gap: 12px;
   border: 1px solid currentColor;
   border-radius: 999px;
   background: color-mix(in srgb, currentColor 8%, transparent);
   backdrop-filter: blur(14px);
-  font-size: 0.86rem;
-  transition: transform 250ms ease;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.2);
+  transition: transform 250ms ease, background 250ms ease;
 }
 
 .demo-back:hover {
@@ -553,12 +555,11 @@
   }
 
   .demo-back {
-    right: 12px;
-    bottom: 12px;
-  }
-
-  .demo-back span {
-    display: none;
+    right: 14px;
+    bottom: 14px;
+    min-height: 56px;
+    padding: 0 20px;
+    font-size: 0.9rem;
   }
 }
 

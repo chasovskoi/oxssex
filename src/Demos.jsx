@@ -15,7 +15,7 @@ function DemoFrame({ className, title, children }) {
   return (
     <main className={`demo ${className}`}>
       <a className="demo-back" href={`${baseUrl}#work`}>
-        <ArrowLeft size={18} />
+        <ArrowLeft size={22} />
         <span>Вернуться в портфолио</span>
       </a>
       {children}
