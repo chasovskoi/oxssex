@@ -477,30 +477,22 @@ function Story() {
 
   useLayoutEffect(() => {
     const media = gsap.matchMedia()
-    media.add('(min-width: 901px) and (prefers-reduced-motion: no-preference)', () => {
+    media.add('(prefers-reduced-motion: no-preference)', () => {
       const ctx = gsap.context(() => {
-        const cards = gsap.utils.toArray('.story-card')
-        cards.forEach((card, index) => {
-          if (index === cards.length - 1) return
-          ScrollTrigger.create({
-            trigger: card,
-            start: 'top top',
-            endTrigger: cards[cards.length - 1],
-            end: 'top top',
-            pin: true,
-            pinSpacing: false,
-          })
-          gsap.to(card.querySelector('.story-card__inner'), {
-            scale: 0.92,
-            opacity: 0.42,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: cards[index + 1],
-              start: 'top bottom',
-              end: 'top top',
-              scrub: true,
-            },
-          })
+        gsap.fromTo('.story-card__inner', {
+          y: 28,
+          opacity: 0,
+        }, {
+          y: 0,
+          opacity: 1,
+          duration: 0.75,
+          stagger: 0.1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: root.current,
+            start: 'top 78%',
+            once: true,
+          },
         })
       }, root)
       return () => ctx.revert()
@@ -509,18 +501,21 @@ function Story() {
   }, [])
 
   const cards = [
-    ['Разобраться', 'Определяем аудиторию и действие, к которому ведёт страница.'],
-    ['Найти характер', 'Выбираем типографику и ритм, затем настраиваем цвет и движение.'],
-    ['Собрать и запустить', 'Верстаем адаптивно, проверяем состояния и готовим сайт к реальному использованию.'],
+    { title: 'Разобраться', text: 'Определяем аудиторию и действие, к которому ведёт страница.', result: 'Карта страницы' },
+    { title: 'Найти характер', text: 'Выбираем типографику и ритм, затем настраиваем цвет и движение.', result: 'Визуальная система' },
+    { title: 'Собрать и запустить', text: 'Верстаем адаптивно, проверяем состояния и готовим сайт к реальному использованию.', result: 'Рабочая ссылка' },
   ]
 
   return (
     <section className="story" data-nav-section="approach" ref={root}>
-      {cards.map(([title, text]) => (
+      {cards.map(({ title, text, result }) => (
         <article className="story-card" key={title}>
           <div className="story-card__inner">
-            <h3>{title}</h3>
-            <p>{text}</p>
+            <span className="story-card__result">{result}</span>
+            <div className="story-card__copy">
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </div>
           </div>
         </article>
       ))}
