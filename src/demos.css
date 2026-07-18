@@ -230,24 +230,93 @@
 
 .report-search {
   justify-self: end;
+  position: relative;
   width: 42px;
   height: 42px;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
   border: 1px solid rgba(21, 21, 21, 0.22);
-  border-radius: 50%;
+  border-radius: 999px;
   background: transparent;
   color: #151515;
+  transition: width 480ms cubic-bezier(0.16, 1, 0.3, 1), background 220ms ease, border-color 220ms ease;
+}
+
+.report-search.is-open {
+  width: min(280px, 28vw);
+  background: #fff;
+  border-color: rgba(21, 21, 21, 0.38);
+}
+
+.report-search:focus-within {
+  outline: 2px solid #2c69db;
+  outline-offset: 3px;
+}
+
+.report-search > label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.report-search input {
+  min-width: 0;
+  width: calc(100% - 42px);
+  height: 100%;
+  padding: 0 4px 0 16px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #151515;
+  font: inherit;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(18px);
+  transition: opacity 180ms ease, transform 480ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.report-search input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.report-search.is-open input {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+
+.report-search button {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
   cursor: pointer;
   transition: background 220ms ease, transform 180ms ease;
 }
 
-.report-search:hover {
-  background: #fff;
+.report-search button:hover {
+  background: #f1f1ef;
 }
 
-.report-search:active {
-  transform: scale(0.96);
+.report-search button:active {
+  transform: scale(0.92);
+}
+
+.report-empty {
+  margin: 0;
+  padding: 34px 0;
+  border-top: 1px solid rgba(21, 21, 21, 0.2);
+  color: #5e5e5b;
 }
 
 .report-hero,
@@ -885,6 +954,10 @@
 
   .report-search {
     grid-column: 2;
+  }
+
+  .report-search.is-open {
+    width: min(250px, calc(100vw - 108px));
   }
 
   .nocturne-nav button,

@@ -81,6 +81,9 @@ function NocturneDemo({ language }) {
 
 function FormaDemo({ language }) {
   const isEnglish = language === 'en'
+  const searchInput = useRef(null)
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
   const articles = [
     {
       title: isEnglish ? 'LED stages reach smaller regional studios' : 'LED-павильоны выходят за пределы столичных студий',
@@ -93,6 +96,22 @@ function FormaDemo({ language }) {
       image: 'project-nocturne.jpg',
     },
   ]
+  const normalizedQuery = searchQuery.trim().toLocaleLowerCase(language)
+  const visibleArticles = articles.filter((article) =>
+    `${article.title} ${article.category}`.toLocaleLowerCase(language).includes(normalizedQuery),
+  )
+
+  function toggleSearch() {
+    if (searchOpen && searchQuery) {
+      setSearchQuery('')
+      searchInput.current?.focus()
+      return
+    }
+    setSearchOpen((open) => {
+      if (!open) window.requestAnimationFrame(() => searchInput.current?.focus())
+      return !open
+    })
+  }
 
   return (
     <DemoFrame className="demo-forma" title="VP/Report" language={language}>
@@ -104,7 +123,36 @@ function FormaDemo({ language }) {
           <a href="#latest">{isEnglish ? 'Learning' : 'Обучение'}</a>
           <a href="#about">{isEnglish ? 'About' : 'О проекте'}</a>
         </nav>
-        <button className="report-search" type="button" aria-label={isEnglish ? 'Search' : 'Поиск'}><MagnifyingGlass size={20} /></button>
+        <form
+          className={`report-search${searchOpen ? ' is-open' : ''}`}
+          role="search"
+          onSubmit={(event) => event.preventDefault()}
+          onKeyDown={(event) => {
+            if (event.key === 'Escape') {
+              setSearchOpen(false)
+              setSearchQuery('')
+            }
+          }}
+        >
+          <label htmlFor="report-search-input">{isEnglish ? 'Search stories' : 'Поиск материалов'}</label>
+          <input
+            id="report-search-input"
+            ref={searchInput}
+            type="search"
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+            placeholder={isEnglish ? 'Search stories' : 'Найти материал'}
+            tabIndex={searchOpen ? 0 : -1}
+          />
+          <button
+            type="button"
+            onClick={toggleSearch}
+            aria-label={searchQuery ? (isEnglish ? 'Clear search' : 'Очистить поиск') : (isEnglish ? 'Open search' : 'Открыть поиск')}
+            aria-expanded={searchOpen}
+          >
+            {searchQuery ? <X size={20} /> : <MagnifyingGlass size={20} />}
+          </button>
+        </form>
       </header>
 
       <section className="report-hero" id="top">
@@ -119,7 +167,7 @@ function FormaDemo({ language }) {
       <section className="report-latest" id="latest">
         <div className="report-feed">
           <h2>{isEnglish ? 'Latest stories' : 'Последние материалы'}</h2>
-          {articles.map((article) => (
+          {visibleArticles.map((article) => (
             <article key={article.title}>
               <img src={imagePath(article.image)} alt="" />
               <div>
@@ -129,6 +177,9 @@ function FormaDemo({ language }) {
               </div>
             </article>
           ))}
+          {visibleArticles.length === 0 && (
+            <p className="report-empty">{isEnglish ? 'No stories found. Try another query.' : 'Материалы не найдены. Попробуйте другой запрос.'}</p>
+          )}
         </div>
         <aside className="report-subscribe" id="about">
           <h2>{isEnglish ? 'One useful letter a week' : 'Одно полезное письмо в неделю'}</h2>
@@ -293,7 +344,6 @@ function ApertureDemo({ language }) {
 const demos = {
   nocturne: NocturneDemo,
   forma: FormaDemo,
-  aperture: ApertureDemo,
   offset: OffsetDemo,
 }
 
