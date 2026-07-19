@@ -1261,7 +1261,7 @@ img {
 @media (min-width: 1101px) {
   .service-detail {
     margin-top: clamp(-320px, -18vw, -220px);
-    margin-left: clamp(22px, 1.8vw, 36px);
+    margin-left: clamp(58px, 4vw, 80px);
   }
 }
 
