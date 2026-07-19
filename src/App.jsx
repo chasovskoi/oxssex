@@ -172,7 +172,7 @@ const principles = [
 
 const copy = {
   ru: {
-    nav: { top: 'Главная', work: 'Работы', approach: 'Услуги', contact: 'Контакт' },
+    nav: { top: 'Главная', work: 'Работы', approach: 'Услуги', about: 'О нас', contact: 'Контакт' },
     aria: { home: 'На главную', navigation: 'Основная навигация', light: 'Включить светлую тему', dark: 'Включить тёмную тему', language: 'Switch to English', serviceChoice: 'Выбор услуги' },
     hero: { aria: 'Создаю сайты, в которые верят', lineOne: 'Создаю сайты,', lineTwoBefore: 'в которые', lineTwoAfter: 'верят', copyBefore: 'Дизайн, код и', copyAfter: 'для цифровых продуктов с характером.', work: 'Смотреть работы', contact: 'Обсудить проект' },
     work: { eyebrow: 'Избранные работы', title: 'Три проекта с живыми демо.', text: 'Откройте любой проект, прокрутите страницу и проверьте адаптивную версию.', open: 'Открыть кейс', close: 'Закрыть кейс', challenge: 'Задача', solution: 'Решение', role: 'Моя роль', tools: 'Инструменты', demo: 'Открыть демо' },
@@ -183,11 +183,42 @@ const copy = {
       { title: 'Собрать и запустить', text: 'Верстаем адаптивно, проверяем состояния и готовим сайт к реальному использованию.', result: 'Рабочая ссылка' },
     ],
     principles: { previous: 'Предыдущий принцип', next: 'Следующий принцип' },
+    about: {
+      eyebrow: 'Outline Digital',
+      titleOne: 'Нас трое.',
+      titleTwo: 'Работаем из Харькова.',
+      lead: 'Работаем удалённо. oxssex ведёт проекты и остаётся главным контактом для клиента. Два программиста отвечают за разработку.',
+      sectionEyebrow: 'Команда',
+      sectionTitle: 'У каждого своя зона ответственности.',
+      paragraphs: [
+        'С клиентом общается oxssex. Он собирает задачу, фиксирует сроки, показывает промежуточные версии и сводит правки. Вам не приходится пересказывать одно и то же разным людям.',
+        'Два программиста подключаются к проекту с самого начала. Они собирают интерфейс, адаптивную версию, анимацию и техническую часть сайта. Объём работы распределяем внутри команды.',
+        'Показываем результат по этапам: структура, ключевой экран, рабочая сборка. Так мы замечаем спорные места до запуска и не откладываем все правки на последний день.',
+      ],
+      roles: [
+        { number: '01', name: 'oxssex', role: 'Менеджер и лицо команды', text: 'Ведёт переписку, уточняет задачу, согласует сроки и собирает обратную связь.' },
+        { number: '02', name: 'Программист', role: 'Интерфейс и адаптив', text: 'Собирает экраны, компоненты, мобильные версии и состояния.' },
+        { number: '03', name: 'Программист', role: 'Логика и запуск', text: 'Отвечает за поведение сайта, интеграции, проверку и публикацию.' },
+      ],
+      processEyebrow: 'Как работаем',
+      processTitle: 'Короткими этапами, с понятным результатом.',
+      process: [
+        ['Задача', 'Фиксируем цель, объём и сроки.'],
+        ['Направление', 'Показываем структуру и ключевой экран.'],
+        ['Сборка', 'Разрабатываем сайт и проверяем адаптив.'],
+        ['Запуск', 'Публикуем, проверяем и остаёмся на связи.'],
+      ],
+      ctaTitle: 'Есть задача? Напишите oxssex.',
+      ctaText: 'Достаточно коротко описать проект, сроки и приложить пару референсов.',
+      ctaTelegram: 'Написать в Telegram',
+      ctaWork: 'Смотреть работы',
+      location: 'Харьков / удалённо',
+    },
     contact: { eyebrow: 'Прямой контакт', titleOne: 'Удобный способ', titleTwo: 'связи.', text: 'Опишите задачу, сроки и референсы. Если технического задания пока нет, достаточно рассказать о цели своими словами.', name: 'Ваше имя', namePlaceholder: 'Как к вам обращаться', email: 'Ваша почта', brief: 'Что нужно сделать', briefPlaceholder: 'Коротко опишите задачу, сроки и референсы', consent: 'Я согласен на обработку данных для ответа на заявку.', sending: 'Отправляем...', submit: 'Отправить заявку', sendingStatus: 'Отправляем заявку...', success: 'Заявка отправлена. Я свяжусь с вами по email.', error: 'Не удалось отправить заявку. Напишите мне в Telegram.' },
-    footer: { description: 'Сайты, веб-интерфейсы и motion-дизайн для цифровых продуктов.', services: 'Услуги', navigation: 'Навигация', portfolio: 'Портфолио', approach: 'Подход', contacts: 'Контакты', privacy: 'Политика обработки данных', copyright: '© 2026 oxssex. Все права защищены.', close: 'Закрыть', privacyOne: 'Данные из формы используются только для ответа на заявку. Имя, email и описание проекта отправляются на почту владельца сайта через сервис FormSubmit.', privacyTwo: 'Данные не продаются и не используются для рекламных рассылок. Чтобы запросить удаление информации, напишите в Telegram @oxssex.' },
+    footer: { description: 'Сайты, веб-интерфейсы и motion-дизайн для цифровых продуктов.', services: 'Услуги', navigation: 'Навигация', portfolio: 'Портфолио', approach: 'Подход', about: 'О нас', contacts: 'Контакты', privacy: 'Политика обработки данных', copyright: '© 2026 oxssex. Все права защищены.', close: 'Закрыть', privacyOne: 'Данные из формы используются только для ответа на заявку. Имя, email и описание проекта отправляются на почту владельца сайта через сервис FormSubmit.', privacyTwo: 'Данные не продаются и не используются для рекламных рассылок. Чтобы запросить удаление информации, напишите в Telegram @oxssex.' },
   },
   en: {
-    nav: { top: 'Home', work: 'Work', approach: 'Services', contact: 'Contact' },
+    nav: { top: 'Home', work: 'Work', approach: 'Services', about: 'About', contact: 'Contact' },
     aria: { home: 'Back to home', navigation: 'Main navigation', light: 'Use light theme', dark: 'Use dark theme', language: 'Переключить на русский', serviceChoice: 'Choose a service' },
     hero: { aria: 'I build websites people can trust', lineOne: 'I build websites', lineTwoBefore: 'people can', lineTwoAfter: 'trust.', copyBefore: 'Design, code and', copyAfter: 'for digital products with a point of view.', work: 'View selected work', contact: 'Start a project' },
     work: { eyebrow: 'Selected work', title: 'Three projects. Three live demos.', text: 'Open a project, explore the page and try it at any screen size.', open: 'Open case study', close: 'Close case study', challenge: 'Challenge', solution: 'Solution', role: 'My role', tools: 'Tools', demo: 'Open live demo' },
@@ -198,8 +229,39 @@ const copy = {
       { title: 'Build and launch', text: 'Develop responsively, test real states and prepare the site for daily use.', result: 'Live website' },
     ],
     principles: { previous: 'Previous principle', next: 'Next principle' },
+    about: {
+      eyebrow: 'Outline Digital',
+      titleOne: 'There are three of us.',
+      titleTwo: 'We work from Kharkiv.',
+      lead: 'We work remotely. oxssex runs each project and remains the main contact for the client. Two developers handle the build.',
+      sectionEyebrow: 'The team',
+      sectionTitle: 'Each person has a clear area of responsibility.',
+      paragraphs: [
+        'Clients speak with oxssex. He gathers the brief, sets the schedule, shares work in progress and organises feedback. You do not have to repeat the same context to several people.',
+        'Both developers join the project from the start. They build the interface, responsive layouts, motion and the technical parts of the website. We divide the workload inside the team.',
+        'We share the result in stages: structure, key screen and working build. This helps us catch unclear details before launch instead of leaving every change until the final day.',
+      ],
+      roles: [
+        { number: '01', name: 'oxssex', role: 'Manager and team lead', text: 'Handles communication, clarifies the brief, agrees timing and organises feedback.' },
+        { number: '02', name: 'Developer', role: 'Interface and responsive UI', text: 'Builds screens, components, mobile layouts and interface states.' },
+        { number: '03', name: 'Developer', role: 'Logic and launch', text: 'Handles site behaviour, integrations, testing and publication.' },
+      ],
+      processEyebrow: 'How we work',
+      processTitle: 'Short stages with a clear result.',
+      process: [
+        ['Brief', 'Set the goal, scope and timing.'],
+        ['Direction', 'Share the structure and key screen.'],
+        ['Build', 'Develop the site and test responsive layouts.'],
+        ['Launch', 'Publish, check and stay available.'],
+      ],
+      ctaTitle: 'Have a project? Message oxssex.',
+      ctaText: 'A short description, your timing and a couple of references are enough to start.',
+      ctaTelegram: 'Message on Telegram',
+      ctaWork: 'View selected work',
+      location: 'Kharkiv / remote',
+    },
     contact: { eyebrow: 'Direct contact', titleOne: 'A straightforward', titleTwo: 'way to talk.', text: 'Send the goal, timing and any references you have. No formal brief is required. A plain description is enough to start.', name: 'Your name', namePlaceholder: 'How should I address you?', email: 'Your email', brief: 'What do you need?', briefPlaceholder: 'Tell me about the project, timing and references', consent: 'I agree to the use of my details to reply to this enquiry.', sending: 'Sending...', submit: 'Send enquiry', sendingStatus: 'Sending your enquiry...', success: 'Message sent. I will reply by email.', error: 'The form did not send. Please message me on Telegram.' },
-    footer: { description: 'Websites, interfaces and motion design for digital products.', services: 'Services', navigation: 'Navigation', portfolio: 'Portfolio', approach: 'Approach', contacts: 'Contact', privacy: 'Data and privacy', copyright: '© 2026 oxssex. All rights reserved.', close: 'Close', privacyOne: 'Form details are used only to reply to your enquiry. Your name, email and project description are sent to the site owner through FormSubmit.', privacyTwo: 'Your details are not sold or used for marketing. To request deletion, message @oxssex on Telegram.' },
+    footer: { description: 'Websites, interfaces and motion design for digital products.', services: 'Services', navigation: 'Navigation', portfolio: 'Portfolio', approach: 'Approach', about: 'About', contacts: 'Contact', privacy: 'Data and privacy', copyright: '© 2026 oxssex. All rights reserved.', close: 'Close', privacyOne: 'Form details are used only to reply to your enquiry. Your name, email and project description are sent to the site owner through FormSubmit.', privacyTwo: 'Your details are not sold or used for marketing. To request deletion, message @oxssex on Telegram.' },
   },
 }
 
@@ -225,13 +287,21 @@ function useLanguage() {
   useEffect(() => {
     document.documentElement.lang = language
     document.documentElement.dataset.language = language
-    if (!new URLSearchParams(window.location.search).has('demo')) {
-      document.title = language === 'ru' ? 'oxssex | Дизайн и разработка' : 'oxssex | Design and development'
+    const searchParams = new URLSearchParams(window.location.search)
+    if (!searchParams.has('demo')) {
+      const isAboutPage = searchParams.get('page') === 'about'
+      document.title = isAboutPage
+        ? language === 'ru' ? 'О нас | oxssex' : 'About | oxssex'
+        : language === 'ru' ? 'oxssex | Дизайн и разработка' : 'oxssex | Design and development'
       document.querySelector('meta[name="description"]')?.setAttribute(
         'content',
-        language === 'ru'
-          ? 'Портфолио независимого разработчика цифровых продуктов.'
-          : 'Independent designer and developer portfolio for digital products.',
+        isAboutPage
+          ? language === 'ru'
+            ? 'Команда из Харькова: менеджер oxssex и два программиста. Работаем удалённо над сайтами и веб-интерфейсами.'
+            : 'A remote team from Kharkiv: manager oxssex and two developers building websites and web interfaces.'
+          : language === 'ru'
+            ? 'Портфолио независимого разработчика цифровых продуктов.'
+            : 'Independent designer and developer portfolio for digital products.',
       )
     }
     localStorage.setItem('portfolio-language', language)
@@ -258,17 +328,24 @@ function LanguageToggle({ language, setLanguage, label }) {
   )
 }
 
-function Header({ theme, setTheme, language, setLanguage, text }) {
-  const [activeSection, setActiveSection] = useState('top')
+function Header({ theme, setTheme, language, setLanguage, text, page = 'portfolio' }) {
+  const [activeSection, setActiveSection] = useState(page === 'about' ? 'about' : 'top')
   const [servicesOpen, setServicesOpen] = useState(false)
   const servicesMenuRef = useRef(null)
+  const basePath = import.meta.env.BASE_URL
   const navigation = [
     { id: 'top', label: text.nav.top },
     { id: 'work', label: text.nav.work },
     { id: 'approach', label: text.nav.approach },
+    { id: 'about', label: text.nav.about },
     { id: 'contact', label: text.nav.contact },
   ]
   useEffect(() => {
+    if (page === 'about') {
+      setActiveSection('about')
+      return undefined
+    }
+
     const sections = Array.from(document.querySelectorAll('[data-nav-section]'))
     const headerOffset = window.matchMedia('(max-width: 900px)').matches ? 106 : 72
 
@@ -297,7 +374,7 @@ function Header({ theme, setTheme, language, setLanguage, text }) {
       window.removeEventListener('pageshow', syncFromViewport)
       window.removeEventListener('hashchange', syncFromViewport)
     }
-  }, [])
+  }, [page])
 
   useEffect(() => {
     function closeOnOutsideClick(event) {
@@ -309,7 +386,7 @@ function Header({ theme, setTheme, language, setLanguage, text }) {
 
   return (
     <header className="header" onKeyDown={(event) => event.key === 'Escape' && setServicesOpen(false)}>
-      <a className="wordmark" href="#top" aria-label={text.aria.home}>oxssex</a>
+      <a className="wordmark" href={page === 'about' ? `${basePath}#top` : '#top'} aria-label={text.aria.home}>oxssex</a>
       <nav className="nav-index" aria-label={text.aria.navigation}>
         {navigation.map((item, index) => item.id === 'approach' ? (
           <div
@@ -333,8 +410,9 @@ function Header({ theme, setTheme, language, setLanguage, text }) {
             <div className={`services-menu ${servicesOpen ? 'is-open' : ''}`} id="services-dropdown">
               {services.map((service, serviceIndex) => (
                 <a
-                  href={`#service-${service.id}`}
+                  href={page === 'about' ? `${basePath}#service-${service.id}` : `#service-${service.id}`}
                   onClick={(event) => {
+                    if (page === 'about') return
                     openService(event, service.id)
                     setActiveSection('approach')
                     setServicesOpen(false)
@@ -350,9 +428,9 @@ function Header({ theme, setTheme, language, setLanguage, text }) {
         ) : (
           <a
             className={`nav-link ${activeSection === item.id ? 'is-active' : ''}`}
-            href={`#${item.id}`}
+            href={item.id === 'about' ? `${basePath}?page=about` : page === 'about' ? `${basePath}#${item.id}` : `#${item.id}`}
             aria-current={activeSection === item.id ? 'page' : undefined}
-            onClick={() => setActiveSection(item.id)}
+            onClick={() => page !== 'about' && setActiveSection(item.id)}
             key={item.id}
           >
             <span className="nav-number">{String(index + 1).padStart(2, '0')}</span>
@@ -923,6 +1001,7 @@ function Contact({ language, text, footerText }) {
             <p>{footerText.navigation}</p>
             <a href="#work">{footerText.portfolio}</a>
             <a href="#approach">{footerText.approach}</a>
+            <a href={`${import.meta.env.BASE_URL}?page=about`}>{footerText.about}</a>
             <a href="#contact">{footerText.contacts}</a>
             <button type="button" onClick={() => privacyDialog.current?.showModal()}>{footerText.privacy}</button>
           </nav>
@@ -958,6 +1037,96 @@ function Portfolio({ language, setLanguage }) {
   )
 }
 
+function AboutPage({ language, setLanguage }) {
+  const [theme, setTheme] = useTheme()
+  const text = copy[language]
+  const about = text.about
+  const portfolioPath = import.meta.env.BASE_URL
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
+  return (
+    <main className="portfolio-shell about-shell" data-language={language}>
+      <Header
+        theme={theme}
+        setTheme={setTheme}
+        language={language}
+        setLanguage={setLanguage}
+        text={text}
+        page="about"
+      />
+      <section className="about-hero" id="about" data-nav-section="about">
+        <div className="about-hero__copy">
+          <p className="about-eyebrow">{about.eyebrow}</p>
+          <h1>{about.titleOne}<br />{about.titleTwo}</h1>
+          <p className="about-lead">{about.lead}</p>
+        </div>
+        <div className="about-location" aria-label={about.location}>
+          <span>03</span>
+          <strong>{about.location}</strong>
+        </div>
+      </section>
+
+      <section className="about-section about-intro">
+        <div className="about-section__heading">
+          <p className="about-eyebrow">{about.sectionEyebrow}</p>
+          <h2>{about.sectionTitle}</h2>
+        </div>
+        <div className="about-intro__text">
+          {about.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+        </div>
+      </section>
+
+      <section className="about-section about-team" aria-label={about.sectionEyebrow}>
+        {about.roles.map((member) => (
+          <article className="about-role" key={member.number}>
+            <span className="about-role__number">{member.number}</span>
+            <div>
+              <h3>{member.name}</h3>
+              <p className="about-role__title">{member.role}</p>
+            </div>
+            <p className="about-role__text">{member.text}</p>
+          </article>
+        ))}
+      </section>
+
+      <section className="about-section about-process">
+        <div className="about-process__heading">
+          <p className="about-eyebrow">{about.processEyebrow}</p>
+          <h2>{about.processTitle}</h2>
+        </div>
+        <ol className="about-process__list">
+          {about.process.map(([title, description], index) => (
+            <li key={title}>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <h3>{title}</h3>
+              <p>{description}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <footer className="about-cta">
+        <div>
+          <h2>{about.ctaTitle}</h2>
+          <p>{about.ctaText}</p>
+        </div>
+        <div className="about-cta__actions">
+          <a className="button button--primary" href="https://t.me/oxssex" target="_blank" rel="noreferrer">
+            <TelegramLogo size={19} /> {about.ctaTelegram}
+          </a>
+          <a className="button button--secondary" href={`${portfolioPath}#work`}>
+            {about.ctaWork} <ArrowDownRight size={19} />
+          </a>
+        </div>
+        <p className="about-cta__meta">© 2026 oxssex · {about.location}</p>
+      </footer>
+    </main>
+  )
+}
+
 function SiteLoader({ language, phase, mode }) {
   if (phase === 'done') return null
 
@@ -988,7 +1157,9 @@ export default function App() {
   const [language, setLanguage] = useLanguage()
   const [loaderPhase, setLoaderPhase] = useState('visible')
   const [loaderMode] = useState(() => sessionStorage.getItem('outline-loader-seen') ? 'quick' : 'full')
-  const demoSlug = new URLSearchParams(window.location.search).get('demo')
+  const searchParams = new URLSearchParams(window.location.search)
+  const demoSlug = searchParams.get('demo')
+  const currentPage = searchParams.get('page')
 
   useEffect(() => {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -1033,7 +1204,11 @@ export default function App() {
 
   return (
     <>
-      {demoSlug ? <DemoProject slug={demoSlug} language={language} /> : <Portfolio language={language} setLanguage={setLanguage} />}
+      {demoSlug
+        ? <DemoProject slug={demoSlug} language={language} />
+        : currentPage === 'about'
+          ? <AboutPage language={language} setLanguage={setLanguage} />
+          : <Portfolio language={language} setLanguage={setLanguage} />}
       <SiteLoader language={language} phase={loaderPhase} mode={loaderMode} />
     </>
   )
