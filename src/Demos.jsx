@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { ArrowLeft, ArrowDownRight, ArrowRight, MagnifyingGlass, Pause, Play, ShoppingBag, UserCircle, X } from '@phosphor-icons/react'
+import { ArrowLeft, ArrowDownRight, ArrowRight, Check, MagnifyingGlass, Minus, Pause, Play, Plus, ShoppingBag, UserCircle, X } from '@phosphor-icons/react'
 import './demos.css'
 
 const baseUrl = import.meta.env.BASE_URL
@@ -198,14 +198,70 @@ function FormaDemo({ language }) {
 function OffsetDemo({ language }) {
   const isEnglish = language === 'en'
   const loginDialog = useRef(null)
-  const [bagCount, setBagCount] = useState(0)
+  const cartCloseButton = useRef(null)
+  const feedbackTimer = useRef(null)
+  const [cart, setCart] = useState([])
+  const [cartOpen, setCartOpen] = useState(false)
+  const [addedProduct, setAddedProduct] = useState(null)
+  const [checkoutNotice, setCheckoutNotice] = useState('')
   const [loggingIn, setLoggingIn] = useState(false)
   const [accountActive, setAccountActive] = useState(false)
   const products = [
-    { name: 'Courtyard, Rome', size: '50 × 70 cm', price: '€48', image: 'project-aperture.jpg' },
-    { name: 'Night District', size: '40 × 50 cm', price: '€36', image: 'project-nocturne.jpg' },
-    { name: 'Analogue Shelf', size: '30 × 40 cm', price: '€29', image: 'project-forma.jpg' },
+    { id: 'courtyard', name: 'Courtyard, Rome', size: '50 × 70 cm', price: 48, image: 'project-aperture.jpg' },
+    { id: 'night-district', name: 'Night District', size: '40 × 50 cm', price: 36, image: 'project-nocturne.jpg' },
+    { id: 'analogue-shelf', name: 'Analogue Shelf', size: '30 × 40 cm', price: 29, image: 'project-forma.jpg' },
   ]
+  const bagCount = cart.reduce((total, item) => total + item.quantity, 0)
+  const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0)
+  const shipping = subtotal === 0 || subtotal >= 100 ? 0 : 6
+  const total = subtotal + shipping
+
+  useEffect(() => {
+    if (!cartOpen) return undefined
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    requestAnimationFrame(() => cartCloseButton.current?.focus())
+
+    function closeOnEscape(event) {
+      if (event.key === 'Escape') setCartOpen(false)
+    }
+
+    document.addEventListener('keydown', closeOnEscape)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      document.removeEventListener('keydown', closeOnEscape)
+    }
+  }, [cartOpen])
+
+  useEffect(() => () => window.clearTimeout(feedbackTimer.current), [])
+
+  function addToCart(product) {
+    setCart((items) => {
+      const existing = items.find((item) => item.id === product.id)
+      if (existing) return items.map((item) => item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item)
+      return [...items, { ...product, quantity: 1 }]
+    })
+    setCheckoutNotice('')
+    setAddedProduct(null)
+    requestAnimationFrame(() => {
+      setAddedProduct(product)
+      window.clearTimeout(feedbackTimer.current)
+      feedbackTimer.current = window.setTimeout(() => setAddedProduct(null), 2400)
+    })
+  }
+
+  function changeQuantity(productId, delta) {
+    setCheckoutNotice('')
+    setCart((items) => items
+      .map((item) => item.id === productId ? { ...item, quantity: item.quantity + delta } : item)
+      .filter((item) => item.quantity > 0))
+  }
+
+  function removeFromCart(productId) {
+    setCheckoutNotice('')
+    setCart((items) => items.filter((item) => item.id !== productId))
+  }
 
   async function handleDemoLogin(event) {
     event.preventDefault()
@@ -228,8 +284,13 @@ function OffsetDemo({ language }) {
             <UserCircle size={20} />
             <span>{accountActive ? (isEnglish ? 'Demo account' : 'Демо-аккаунт') : (isEnglish ? 'Account' : 'Аккаунт')}</span>
           </button>
-          <button type="button" aria-label={isEnglish ? `Bag with ${bagCount} items` : `В корзине товаров: ${bagCount}`}>
-            <ShoppingBag size={20} />
+          <button
+            className={addedProduct ? 'offset-bag-button is-bumping' : 'offset-bag-button'}
+            type="button"
+            aria-label={isEnglish ? `Bag with ${bagCount} items` : `В корзине товаров: ${bagCount}`}
+            onClick={() => setCartOpen(true)}
+          >
+            <span className="offset-bag-button__icon"><ShoppingBag size={20} />{bagCount > 0 && <i>{bagCount}</i>}</span>
             <span>{isEnglish ? 'Bag' : 'Корзина'} ({bagCount})</span>
           </button>
         </div>
@@ -258,10 +319,14 @@ function OffsetDemo({ language }) {
                   <h3>{product.name}</h3>
                   <p>{product.size}</p>
                 </div>
-                <strong>{product.price}</strong>
+                <strong>€{product.price}</strong>
               </div>
-              <button type="button" onClick={() => setBagCount((count) => count + 1)}>
-                {isEnglish ? 'Add to bag' : 'Добавить в корзину'}
+              <button
+                className={addedProduct?.id === product.id ? 'is-added' : ''}
+                type="button"
+                onClick={() => addToCart(product)}
+              >
+                {addedProduct?.id === product.id ? <><Check size={17} /> {isEnglish ? 'Added' : 'Добавлено'}</> : (isEnglish ? 'Add to bag' : 'Добавить в корзину')}
               </button>
             </article>
           ))}
@@ -272,6 +337,85 @@ function OffsetDemo({ language }) {
         <h2>{isEnglish ? 'Printed locally. Packed without plastic.' : 'Печатаем локально. Упаковываем без пластика.'}</h2>
         <p>{isEnglish ? 'Orders in this portfolio demo are not processed.' : 'Заказы в этом демонстрационном проекте не обрабатываются.'}</p>
       </section>
+
+      <div
+        className={`offset-cart-layer ${cartOpen ? 'is-open' : ''}`}
+        aria-hidden={!cartOpen}
+        inert={!cartOpen}
+        onClick={() => setCartOpen(false)}
+      >
+        <aside
+          className="offset-cart"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="offset-cart-title"
+          onClick={(event) => event.stopPropagation()}
+        >
+          <header className="offset-cart__header">
+            <div>
+              <p>{isEnglish ? 'Your selection' : 'Ваш выбор'}</p>
+              <h2 id="offset-cart-title">{isEnglish ? 'Bag' : 'Корзина'} <span>{bagCount}</span></h2>
+            </div>
+            <button ref={cartCloseButton} type="button" onClick={() => setCartOpen(false)} aria-label={isEnglish ? 'Close bag' : 'Закрыть корзину'}><X size={22} /></button>
+          </header>
+
+          {cart.length ? (
+            <div className="offset-cart__content">
+              <div className="offset-cart__items">
+                {cart.map((item) => (
+                  <article className="offset-cart-item" key={item.id}>
+                    <img src={imagePath(item.image)} alt="" />
+                    <div className="offset-cart-item__copy">
+                      <h3>{item.name}</h3>
+                      <p>{item.size}</p>
+                      <strong>€{item.price}</strong>
+                    </div>
+                    <div className="offset-cart-item__actions">
+                      <div className="offset-quantity" aria-label={isEnglish ? `Quantity for ${item.name}` : `Количество: ${item.name}`}>
+                        <button type="button" onClick={() => changeQuantity(item.id, -1)} aria-label={isEnglish ? 'Decrease quantity' : 'Уменьшить количество'}><Minus size={15} /></button>
+                        <span>{item.quantity}</span>
+                        <button type="button" onClick={() => changeQuantity(item.id, 1)} aria-label={isEnglish ? 'Increase quantity' : 'Увеличить количество'}><Plus size={15} /></button>
+                      </div>
+                      <button className="offset-cart-item__remove" type="button" onClick={() => removeFromCart(item.id)}>{isEnglish ? 'Remove' : 'Удалить'}</button>
+                    </div>
+                  </article>
+                ))}
+              </div>
+
+              <div className="offset-cart__summary">
+                <dl>
+                  <div><dt>{isEnglish ? 'Subtotal' : 'Сумма'}</dt><dd>€{subtotal}</dd></div>
+                  <div><dt>{isEnglish ? 'Shipping' : 'Доставка'}</dt><dd>{shipping ? `€${shipping}` : (isEnglish ? 'Free' : 'Бесплатно')}</dd></div>
+                  <div className="offset-cart__total"><dt>{isEnglish ? 'Total' : 'Итого'}</dt><dd>€{total}</dd></div>
+                </dl>
+                <button
+                  className="offset-checkout"
+                  type="button"
+                  onClick={() => setCheckoutNotice(isEnglish ? 'Demo checkout only. No order was placed.' : 'Это демо-оформление. Заказ не создан.')}
+                >
+                  {isEnglish ? 'Checkout demo' : 'Оформить демо-заказ'} <ArrowRight size={19} />
+                </button>
+                <p className="offset-checkout-note" aria-live="polite">{checkoutNotice || (isEnglish ? 'Portfolio demo. Payments are disabled.' : 'Демо для портфолио. Оплата отключена.')}</p>
+              </div>
+            </div>
+          ) : (
+            <div className="offset-cart__empty">
+              <ShoppingBag size={38} weight="light" />
+              <h3>{isEnglish ? 'Your bag is empty' : 'Корзина пуста'}</h3>
+              <p>{isEnglish ? 'Add a print from the current edition.' : 'Добавьте принт из текущей коллекции.'}</p>
+              <button type="button" onClick={() => setCartOpen(false)}>{isEnglish ? 'Continue browsing' : 'Продолжить просмотр'}</button>
+            </div>
+          )}
+        </aside>
+      </div>
+
+      {addedProduct && (
+        <div className="offset-cart-toast" role="status">
+          <span><Check size={16} weight="bold" /></span>
+          <div><strong>{addedProduct.name}</strong><small>{isEnglish ? 'Added to your bag' : 'Добавлено в корзину'}</small></div>
+          <button type="button" onClick={() => { setCartOpen(true); setAddedProduct(null) }}>{isEnglish ? 'View bag' : 'Открыть'}</button>
+        </div>
+      )}
 
       <dialog className="offset-login" ref={loginDialog} onClick={(event) => event.target === event.currentTarget && loginDialog.current?.close()}>
         <button className="offset-login__close" type="button" onClick={() => loginDialog.current?.close()} aria-label={isEnglish ? 'Close' : 'Закрыть'}><X size={21} /></button>
