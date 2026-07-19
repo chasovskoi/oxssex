@@ -8,7 +8,7 @@ const imagePath = (fileName) => `${baseUrl}images/${fileName}`
 function DemoFrame({ className, title, language, children }) {
   useEffect(() => {
     const previousTitle = document.title
-    document.title = `${title} | oxssex demo`
+    document.title = `${title} | Outline Digital demo`
     return () => { document.title = previousTitle }
   }, [title])
 

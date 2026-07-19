@@ -10,6 +10,15 @@ const imagePath = (fileName) => `${import.meta.env.BASE_URL}images/${fileName}`
 const demoPath = (slug) => `${import.meta.env.BASE_URL}?demo=${slug}`
 const localized = (value, language) => value?.[language] ?? value
 
+function BrandWordmark({ className = '' }) {
+  return (
+    <span className={`brand-wordmark ${className}`.trim()} aria-hidden="true">
+      <span className="brand-wordmark__outline">OUTLINE</span>
+      <span className="brand-wordmark__digital">DIGITAL</span>
+    </span>
+  )
+}
+
 function openService(event, id) {
   event.preventDefault()
   const hash = `#service-${id}`
@@ -116,7 +125,7 @@ const services = [
     id: 'websites',
     title: { ru: 'Разработка сайтов', en: 'Website development' },
     shortTitle: { ru: 'Сайты', en: 'Websites' },
-    text: { ru: 'Проектирую лендинги и портфолио с понятной структурой и своим визуальным языком.', en: 'I design landing pages and portfolios with a clear structure and a distinct visual language.' },
+    text: { ru: 'Проектируем лендинги и портфолио с понятной структурой и своим визуальным языком.', en: 'We design landing pages and portfolios with a clear structure and a distinct visual language.' },
     includes: { ru: ['Структура и прототип', 'Дизайн ключевых экранов', 'Адаптивная React-сборка'], en: ['Structure and wireframe', 'Key screen design', 'Responsive React build'] },
     fit: { ru: 'Для запуска услуги, продукта или личного бренда.', en: 'For launching a service, product or personal brand.' },
   },
@@ -124,7 +133,7 @@ const services = [
     id: 'interfaces',
     title: { ru: 'Веб-интерфейсы', en: 'Web interfaces' },
     shortTitle: { ru: 'Интерфейсы', en: 'Interfaces' },
-    text: { ru: 'Собираю экраны, в которых легко найти нужное действие и понять результат.', en: 'I build screens that make the next action and its result easy to understand.' },
+    text: { ru: 'Собираем экраны, в которых легко найти нужное действие и понять результат.', en: 'We build screens that make the next action and its result easy to understand.' },
     includes: { ru: ['Карта сценариев', 'Компоненты и состояния', 'Кликабельный прототип'], en: ['User flow map', 'Components and states', 'Clickable prototype'] },
     fit: { ru: 'Для личного кабинета, каталога или сложного пользовательского пути.', en: 'For dashboards, catalogues and complex user journeys.' },
   },
@@ -132,7 +141,7 @@ const services = [
     id: 'motion',
     title: { ru: 'Motion-дизайн', en: 'Motion design' },
     shortTitle: { ru: 'Motion', en: 'Motion' },
-    text: { ru: 'Добавляю движение там, где оно объясняет иерархию, смену состояния или ход истории.', en: 'I use motion to clarify hierarchy, changes of state and the rhythm of a story.' },
+    text: { ru: 'Добавляем движение там, где оно объясняет иерархию, смену состояния или ход истории.', en: 'We use motion to clarify hierarchy, changes of state and the rhythm of a story.' },
     includes: { ru: ['Микроанимации', 'Скролл-сцены', 'Состояния и переходы'], en: ['Micro-interactions', 'Scroll sequences', 'States and transitions'] },
     fit: { ru: 'Для готового сайта, которому не хватает ритма и обратной связи.', en: 'For an existing site that needs better rhythm and feedback.' },
   },
@@ -140,7 +149,7 @@ const services = [
     id: 'launch',
     title: { ru: 'Запуск проекта', en: 'Project launch' },
     shortTitle: { ru: 'Запуск', en: 'Launch' },
-    text: { ru: 'Довожу готовый макет до публичной ссылки и проверяю его на реальных экранах.', en: 'I turn a finished design into a live site and test it on real screens.' },
+    text: { ru: 'Доводим готовый макет до публичной ссылки и проверяем его на реальных экранах.', en: 'We turn a finished design into a live site and test it on real screens.' },
     includes: { ru: ['Адаптивная верстка', 'Базовое SEO', 'Публикация и проверка'], en: ['Responsive development', 'Essential SEO', 'Deployment and testing'] },
     fit: { ru: 'Для макета в Figma, которому нужны код, домен и стабильная сборка.', en: 'For a Figma design that needs code, a domain and a reliable build.' },
   },
@@ -149,21 +158,21 @@ const services = [
 const principles = [
   {
     title: { ru: 'Сначала смысл', en: 'Meaning first' },
-    text: { ru: 'До макета фиксирую, кому нужен сайт, что человек должен понять и какое действие совершить.', en: 'Before drawing screens, I define who the site is for, what they need to understand and what they should do next.' },
+    text: { ru: 'До макета фиксируем, кому нужен сайт, что человек должен понять и какое действие совершить.', en: 'Before drawing screens, we define who the site is for, what they need to understand and what they should do next.' },
     points: { ru: [['Кому', 'конкретный клиент'], ['Что', 'одна мысль на экран'], ['Действие', 'заявка, покупка или контакт']], en: [['Audience', 'one specific customer'], ['Message', 'one idea per screen'], ['Action', 'enquiry, purchase or contact']] },
     outcome: { ru: 'На выходе: карта страницы и черновик текста.', en: 'You get a page map and a working copy draft.' },
     image: imagePath('principle-focus.jpg'),
   },
   {
     title: { ru: 'Движение по делу', en: 'Motion with a job' },
-    text: { ru: 'Анимирую только те моменты, где движение помогает человеку заметить главное и понять смену состояния.', en: 'I animate moments where movement helps people notice what matters or understand a change of state.' },
+    text: { ru: 'Анимируем только те моменты, где движение помогает человеку заметить главное и понять смену состояния.', en: 'We animate moments where movement helps people notice what matters or understand a change of state.' },
     points: { ru: [['Иерархия', 'взгляд идёт к главному'], ['Отклик', 'интерфейс отвечает на действие'], ['Ритм', 'смена блоков не теряется']], en: [['Hierarchy', 'attention goes to what matters'], ['Feedback', 'the interface answers an action'], ['Rhythm', 'sections connect without getting lost']] },
     outcome: { ru: 'На выходе: набор анимаций с понятной ролью.', en: 'You get a motion set where every effect has a purpose.' },
     image: imagePath('principle-motion.jpg'),
   },
   {
     title: { ru: 'Готово к росту', en: 'Built to grow' },
-    text: { ru: 'Собираю сайт из компонентов. Вы сможете добавить кейс, услугу или новый экран без переделки остальных разделов.', en: 'I build with reusable components, so a new case study, service or screen will not force a full rebuild.' },
+    text: { ru: 'Собираем сайт из компонентов. Вы сможете добавить кейс, услугу или новый экран без переделки остальных разделов.', en: 'We build with reusable components, so a new case study, service or screen will not force a full rebuild.' },
     points: { ru: [['Система', 'повторяемые компоненты'], ['Контент', 'понятные места для замены'], ['Проверка', 'телефон, клавиатура и быстрая загрузка']], en: [['System', 'reusable components'], ['Content', 'clear places to edit'], ['Testing', 'mobile, keyboard and fast loading']] },
     outcome: { ru: 'На выходе: сайт, который не придётся собирать заново.', en: 'You get a site that can change without starting over.' },
     image: imagePath('project-forma.jpg'),
@@ -173,10 +182,10 @@ const principles = [
 const copy = {
   ru: {
     nav: { top: 'Главная', work: 'Работы', approach: 'Услуги', about: 'О нас', contact: 'Контакт' },
-    aria: { home: 'На главную', navigation: 'Основная навигация', light: 'Включить светлую тему', dark: 'Включить тёмную тему', language: 'Switch to English', serviceChoice: 'Выбор услуги' },
-    hero: { aria: 'Создаю сайты, в которые верят', lineOne: 'Создаю сайты,', lineTwoBefore: 'в которые', lineTwoAfter: 'верят', copyBefore: 'Дизайн, код и', copyAfter: 'для цифровых продуктов с характером.', work: 'Смотреть работы', contact: 'Обсудить проект' },
-    work: { eyebrow: 'Избранные работы', title: 'Три проекта с живыми демо.', text: 'Откройте любой проект, прокрутите страницу и проверьте адаптивную версию.', open: 'Открыть кейс', close: 'Закрыть кейс', challenge: 'Задача', solution: 'Решение', role: 'Моя роль', tools: 'Инструменты', demo: 'Открыть демо' },
-    services: { title: 'Что можно поручить мне.', text: 'Выберите задачу. Покажу состав работы и подходящий сценарий.', includes: 'В работу входит', fit: 'Подойдёт', discuss: 'Обсудить задачу' },
+    aria: { home: 'Outline Digital, на главную', navigation: 'Основная навигация', light: 'Включить светлую тему', dark: 'Включить тёмную тему', language: 'Switch to English', serviceChoice: 'Выбор услуги' },
+    hero: { aria: 'Outline Digital создаёт сайты, в которые верят', lineOne: 'Создаём сайты,', lineTwoBefore: 'в которые', lineTwoAfter: 'верят', copyBefore: 'Дизайн, код и', copyAfter: 'для цифровых продуктов с характером.', work: 'Смотреть работы', contact: 'Обсудить проект' },
+    work: { eyebrow: 'Избранные работы', title: 'Три проекта с живыми демо.', text: 'Откройте любой проект, прокрутите страницу и проверьте адаптивную версию.', open: 'Открыть кейс', close: 'Закрыть кейс', challenge: 'Задача', solution: 'Решение', role: 'Наша роль', tools: 'Инструменты', demo: 'Открыть демо' },
+    services: { title: 'Что можно поручить нам.', text: 'Выберите задачу. Покажем состав работы и подходящий сценарий.', includes: 'В работу входит', fit: 'Подойдёт', discuss: 'Обсудить задачу' },
     story: [
       { title: 'Разобраться', text: 'Определяем аудиторию и действие, к которому ведёт страница.', result: 'Карта страницы' },
       { title: 'Найти характер', text: 'Выбираем типографику и ритм, затем настраиваем цвет и движение.', result: 'Визуальная система' },
@@ -208,15 +217,15 @@ const copy = {
       ctaTelegram: 'Написать менеджеру',
       ctaWork: 'Смотреть работы',
     },
-    contact: { eyebrow: 'Прямой контакт', titleOne: 'Удобный способ', titleTwo: 'связи.', text: 'Опишите задачу, сроки и референсы. Если технического задания пока нет, достаточно рассказать о цели своими словами.', name: 'Ваше имя', namePlaceholder: 'Как к вам обращаться', email: 'Ваша почта', brief: 'Что нужно сделать', briefPlaceholder: 'Коротко опишите задачу, сроки и референсы', consent: 'Я согласен на обработку данных для ответа на заявку.', sending: 'Отправляем...', submit: 'Отправить заявку', sendingStatus: 'Отправляем заявку...', success: 'Заявка отправлена. Я свяжусь с вами по email.', error: 'Не удалось отправить заявку. Напишите мне в Telegram.' },
-    footer: { description: 'Сайты, веб-интерфейсы и motion-дизайн для цифровых продуктов.', services: 'Услуги', navigation: 'Навигация', portfolio: 'Портфолио', approach: 'Подход', about: 'О нас', contacts: 'Контакты', privacy: 'Политика обработки данных', copyright: '© 2026 oxssex. Все права защищены.', close: 'Закрыть', privacyOne: 'Данные из формы используются только для ответа на заявку. Имя, email и описание проекта отправляются на почту владельца сайта через сервис FormSubmit.', privacyTwo: 'Данные не продаются и не используются для рекламных рассылок. Чтобы запросить удаление информации, напишите в Telegram @oxssex.' },
+    contact: { eyebrow: 'Прямой контакт', titleOne: 'Удобный способ', titleTwo: 'связи.', text: 'Опишите задачу, сроки и референсы. Если технического задания пока нет, достаточно рассказать о цели своими словами.', name: 'Ваше имя', namePlaceholder: 'Как к вам обращаться', email: 'Ваша почта', brief: 'Что нужно сделать', briefPlaceholder: 'Коротко опишите задачу, сроки и референсы', consent: 'Я согласен на обработку данных для ответа на заявку.', sending: 'Отправляем...', submit: 'Отправить заявку', sendingStatus: 'Отправляем заявку...', success: 'Заявка отправлена. Менеджер свяжется с вами по email.', error: 'Не удалось отправить заявку. Напишите менеджеру в Telegram.' },
+    footer: { description: 'Outline Digital создаёт сайты, веб-интерфейсы и motion-дизайн для цифровых продуктов.', services: 'Услуги', navigation: 'Навигация', portfolio: 'Портфолио', approach: 'Подход', about: 'О нас', contacts: 'Контакты', privacy: 'Политика обработки данных', copyright: '© 2026 Outline Digital. Все права защищены.', close: 'Закрыть', privacyOne: 'Данные из формы используются только для ответа на заявку. Имя, email и описание проекта отправляются на почту владельца сайта через сервис FormSubmit.', privacyTwo: 'Данные не продаются и не используются для рекламных рассылок. Чтобы запросить удаление информации, напишите менеджеру @oxssex в Telegram.' },
   },
   en: {
     nav: { top: 'Home', work: 'Work', approach: 'Services', about: 'About', contact: 'Contact' },
-    aria: { home: 'Back to home', navigation: 'Main navigation', light: 'Use light theme', dark: 'Use dark theme', language: 'Переключить на русский', serviceChoice: 'Choose a service' },
-    hero: { aria: 'I build websites people can trust', lineOne: 'I build websites', lineTwoBefore: 'people can', lineTwoAfter: 'trust.', copyBefore: 'Design, code and', copyAfter: 'for digital products with a point of view.', work: 'View selected work', contact: 'Start a project' },
-    work: { eyebrow: 'Selected work', title: 'Three projects. Three live demos.', text: 'Open a project, explore the page and try it at any screen size.', open: 'Open case study', close: 'Close case study', challenge: 'Challenge', solution: 'Solution', role: 'My role', tools: 'Tools', demo: 'Open live demo' },
-    services: { title: 'What I can take off your plate.', text: 'Choose a task to see the scope and where it fits.', includes: 'What is included', fit: 'Best for', discuss: 'Discuss this project' },
+    aria: { home: 'Outline Digital, back to home', navigation: 'Main navigation', light: 'Use light theme', dark: 'Use dark theme', language: 'Переключить на русский', serviceChoice: 'Choose a service' },
+    hero: { aria: 'Outline Digital builds websites people can trust', lineOne: 'We build websites', lineTwoBefore: 'people can', lineTwoAfter: 'trust.', copyBefore: 'Design, code and', copyAfter: 'for digital products with a point of view.', work: 'View selected work', contact: 'Start a project' },
+    work: { eyebrow: 'Selected work', title: 'Three projects. Three live demos.', text: 'Open a project, explore the page and try it at any screen size.', open: 'Open case study', close: 'Close case study', challenge: 'Challenge', solution: 'Solution', role: 'Our role', tools: 'Tools', demo: 'Open live demo' },
+    services: { title: 'What you can ask us to handle.', text: 'Choose a task to see the scope and where it fits.', includes: 'What is included', fit: 'Best for', discuss: 'Discuss this project' },
     story: [
       { title: 'Get clear', text: 'Define the audience and the action each page should lead to.', result: 'Page map' },
       { title: 'Find the voice', text: 'Set the type, pace, colour and motion until the product feels like itself.', result: 'Visual system' },
@@ -248,8 +257,8 @@ const copy = {
       ctaTelegram: 'Message the manager',
       ctaWork: 'View selected work',
     },
-    contact: { eyebrow: 'Direct contact', titleOne: 'A straightforward', titleTwo: 'way to talk.', text: 'Send the goal, timing and any references you have. No formal brief is required. A plain description is enough to start.', name: 'Your name', namePlaceholder: 'How should I address you?', email: 'Your email', brief: 'What do you need?', briefPlaceholder: 'Tell me about the project, timing and references', consent: 'I agree to the use of my details to reply to this enquiry.', sending: 'Sending...', submit: 'Send enquiry', sendingStatus: 'Sending your enquiry...', success: 'Message sent. I will reply by email.', error: 'The form did not send. Please message me on Telegram.' },
-    footer: { description: 'Websites, interfaces and motion design for digital products.', services: 'Services', navigation: 'Navigation', portfolio: 'Portfolio', approach: 'Approach', about: 'About', contacts: 'Contact', privacy: 'Data and privacy', copyright: '© 2026 oxssex. All rights reserved.', close: 'Close', privacyOne: 'Form details are used only to reply to your enquiry. Your name, email and project description are sent to the site owner through FormSubmit.', privacyTwo: 'Your details are not sold or used for marketing. To request deletion, message @oxssex on Telegram.' },
+    contact: { eyebrow: 'Direct contact', titleOne: 'A straightforward', titleTwo: 'way to talk.', text: 'Send the goal, timing and any references you have. No formal brief is required. A plain description is enough to start.', name: 'Your name', namePlaceholder: 'How should I address you?', email: 'Your email', brief: 'What do you need?', briefPlaceholder: 'Tell us about the project, timing and references', consent: 'I agree to the use of my details to reply to this enquiry.', sending: 'Sending...', submit: 'Send enquiry', sendingStatus: 'Sending your enquiry...', success: 'Message sent. Our manager will reply by email.', error: 'The form did not send. Please message our manager on Telegram.' },
+    footer: { description: 'Outline Digital creates websites, interfaces and motion design for digital products.', services: 'Services', navigation: 'Navigation', portfolio: 'Portfolio', approach: 'Approach', about: 'About', contacts: 'Contact', privacy: 'Data and privacy', copyright: '© 2026 Outline Digital. All rights reserved.', close: 'Close', privacyOne: 'Form details are used only to reply to your enquiry. Your name, email and project description are sent to the site owner through FormSubmit.', privacyTwo: 'Your details are not sold or used for marketing. To request deletion, message our manager @oxssex on Telegram.' },
   },
 }
 
@@ -279,8 +288,8 @@ function useLanguage() {
     if (!searchParams.has('demo')) {
       const isAboutPage = searchParams.get('page') === 'about'
       document.title = isAboutPage
-        ? language === 'ru' ? 'О нас | oxssex' : 'About | oxssex'
-        : language === 'ru' ? 'oxssex | Дизайн и разработка' : 'oxssex | Design and development'
+        ? language === 'ru' ? 'О нас | Outline Digital' : 'About | Outline Digital'
+        : language === 'ru' ? 'Outline Digital | Дизайн и разработка' : 'Outline Digital | Design and development'
       document.querySelector('meta[name="description"]')?.setAttribute(
         'content',
         isAboutPage
@@ -288,8 +297,8 @@ function useLanguage() {
             ? 'Команда из Харькова: менеджер oxssex и два программиста. Работаем удалённо над сайтами и веб-интерфейсами.'
             : 'A remote team from Kharkiv: manager oxssex and two developers building websites and web interfaces.'
           : language === 'ru'
-            ? 'Портфолио независимого разработчика цифровых продуктов.'
-            : 'Independent designer and developer portfolio for digital products.',
+            ? 'Outline Digital создаёт сайты, веб-интерфейсы и motion-дизайн для цифровых продуктов.'
+            : 'Outline Digital creates websites, web interfaces and motion design for digital products.',
       )
     }
     localStorage.setItem('portfolio-language', language)
@@ -374,7 +383,9 @@ function Header({ theme, setTheme, language, setLanguage, text, page = 'portfoli
 
   return (
     <header className="header" onKeyDown={(event) => event.key === 'Escape' && setServicesOpen(false)}>
-      <a className="wordmark" href={page === 'about' ? `${basePath}#top` : '#top'} aria-label={text.aria.home}>oxssex</a>
+      <a className="wordmark" href={page === 'about' ? `${basePath}#top` : '#top'} aria-label={text.aria.home}>
+        <BrandWordmark />
+      </a>
       <nav className="nav-index" aria-label={text.aria.navigation}>
         {navigation.map((item, index) => item.id === 'approach' ? (
           <div
@@ -904,7 +915,9 @@ function SiteFooter({ language, footerText, page = 'portfolio' }) {
       <div className="site-footer">
         <div className="footer-grid">
           <div className="footer-brand">
-            <a href={mainHref('top')}>oxssex</a>
+            <a href={mainHref('top')} aria-label={language === 'ru' ? 'Outline Digital, на главную' : 'Outline Digital, back to home'}>
+              <BrandWordmark />
+            </a>
             <p>{footerText.description}</p>
             <a className="footer-telegram" href="https://t.me/oxssex" target="_blank" rel="noreferrer">Telegram</a>
           </div>
@@ -966,7 +979,7 @@ function Contact({ language, text, footerText }) {
           email: form.get('email'),
           message: form.get('brief'),
           _replyto: form.get('email'),
-          _subject: language === 'ru' ? 'Новая заявка с сайта oxssex' : 'New enquiry from oxssex',
+          _subject: language === 'ru' ? 'Новая заявка с сайта Outline Digital' : 'New enquiry from Outline Digital',
           _template: 'table',
           _honey: form.get('_honey'),
         }),
@@ -991,7 +1004,7 @@ function Contact({ language, text, footerText }) {
           <p>{text.text}</p>
           <a className="telegram-link" href="https://t.me/oxssex" target="_blank" rel="noreferrer">
             <TelegramLogo size={24} weight="regular" />
-            Telegram @oxssex
+            {language === 'ru' ? 'Менеджер @oxssex' : 'Manager @oxssex'}
           </a>
         </div>
         <form className="contact-form" onSubmit={handleSubmit}>
