@@ -893,10 +893,59 @@ function Principles({ language, text }) {
   )
 }
 
+function SiteFooter({ language, footerText, page = 'portfolio' }) {
+  const privacyDialog = useRef(null)
+  const basePath = import.meta.env.BASE_URL
+  const onAboutPage = page === 'about'
+  const mainHref = (hash) => onAboutPage ? `${basePath}#${hash}` : `#${hash}`
+
+  return (
+    <>
+      <div className="site-footer">
+        <div className="footer-grid">
+          <div className="footer-brand">
+            <a href={mainHref('top')}>oxssex</a>
+            <p>{footerText.description}</p>
+            <a className="footer-telegram" href="https://t.me/oxssex" target="_blank" rel="noreferrer">Telegram</a>
+          </div>
+          <nav className="footer-column" aria-label={footerText.services}>
+            <p>{footerText.services}</p>
+            {services.map((service) => (
+              <a
+                href={mainHref(`service-${service.id}`)}
+                onClick={(event) => !onAboutPage && openService(event, service.id)}
+                key={service.id}
+              >
+                {localized(service.title, language)}
+              </a>
+            ))}
+          </nav>
+          <nav className="footer-column" aria-label={footerText.navigation}>
+            <p>{footerText.navigation}</p>
+            <a href={mainHref('work')}>{footerText.portfolio}</a>
+            <a href={mainHref('approach')}>{footerText.approach}</a>
+            <a href={`${basePath}?page=about`}>{footerText.about}</a>
+            <a href={mainHref('contact')}>{footerText.contacts}</a>
+            <button type="button" onClick={() => privacyDialog.current?.showModal()}>{footerText.privacy}</button>
+          </nav>
+        </div>
+        <p className="footer-copyright">{footerText.copyright}</p>
+      </div>
+      <dialog className="privacy-dialog" ref={privacyDialog}>
+        <div className="privacy-dialog__header">
+          <h2>{footerText.privacy}</h2>
+          <button type="button" onClick={() => privacyDialog.current?.close()} aria-label={footerText.close}>{footerText.close}</button>
+        </div>
+        <p>{footerText.privacyOne}</p>
+        <p>{footerText.privacyTwo}</p>
+      </dialog>
+    </>
+  )
+}
+
 function Contact({ language, text, footerText }) {
   const [status, setStatus] = useState('')
   const [submitting, setSubmitting] = useState(false)
-  const privacyDialog = useRef(null)
 
   async function handleSubmit(event) {
     event.preventDefault()
@@ -972,38 +1021,7 @@ function Contact({ language, text, footerText }) {
           <p className="form-status" aria-live="polite">{status}</p>
         </form>
       </div>
-      <div className="site-footer">
-        <div className="footer-grid">
-          <div className="footer-brand">
-            <a href="#top">oxssex</a>
-            <p>{footerText.description}</p>
-            <a className="footer-telegram" href="https://t.me/oxssex" target="_blank" rel="noreferrer">Telegram</a>
-          </div>
-          <nav className="footer-column" aria-label={footerText.services}>
-            <p>{footerText.services}</p>
-            {services.map((service) => (
-              <a href={`#service-${service.id}`} onClick={(event) => openService(event, service.id)} key={service.id}>{localized(service.title, language)}</a>
-            ))}
-          </nav>
-          <nav className="footer-column" aria-label={footerText.navigation}>
-            <p>{footerText.navigation}</p>
-            <a href="#work">{footerText.portfolio}</a>
-            <a href="#approach">{footerText.approach}</a>
-            <a href={`${import.meta.env.BASE_URL}?page=about`}>{footerText.about}</a>
-            <a href="#contact">{footerText.contacts}</a>
-            <button type="button" onClick={() => privacyDialog.current?.showModal()}>{footerText.privacy}</button>
-          </nav>
-        </div>
-        <p className="footer-copyright">{footerText.copyright}</p>
-      </div>
-      <dialog className="privacy-dialog" ref={privacyDialog}>
-        <div className="privacy-dialog__header">
-          <h2>{footerText.privacy}</h2>
-          <button type="button" onClick={() => privacyDialog.current?.close()} aria-label={footerText.close}>{footerText.close}</button>
-        </div>
-        <p>{footerText.privacyOne}</p>
-        <p>{footerText.privacyTwo}</p>
-      </dialog>
+      <SiteFooter language={language} footerText={footerText} />
     </footer>
   )
 }
@@ -1093,6 +1111,9 @@ function AboutPage({ language, setLanguage }) {
           </a>
         </div>
       </section>
+      <footer className="about-site-footer">
+        <SiteFooter language={language} footerText={text.footer} page="about" />
+      </footer>
     </main>
   )
 }

@@ -1919,6 +1919,15 @@ img {
   gap: 10px;
 }
 
+.about-site-footer {
+  padding: 0 max(24px, calc((100vw - 1400px) / 2)) 34px;
+  background: var(--surface);
+}
+
+.about-site-footer .site-footer {
+  margin-top: 0;
+}
+
 .contact {
   padding: clamp(90px, 12vw, 170px) max(24px, calc((100vw - 1400px) / 2)) 34px;
   background: var(--surface);
@@ -2887,6 +2896,11 @@ img {
 
   .about-cta__actions {
     width: 100%;
+  }
+
+  .about-site-footer {
+    padding-right: 16px;
+    padding-left: 16px;
   }
 
 }
