@@ -203,9 +203,9 @@ const copy = {
         ['Сборка', 'Разрабатываем сайт и проверяем адаптив.'],
         ['Запуск', 'Публикуем, проверяем и остаёмся на связи.'],
       ],
-      ctaTitle: 'Есть задача? Напишите oxssex.',
+      ctaTitle: 'Есть задача? Напишите менеджеру.',
       ctaText: 'Достаточно коротко описать проект, сроки и приложить пару референсов.',
-      ctaTelegram: 'Написать в Telegram',
+      ctaTelegram: 'Написать менеджеру',
       ctaWork: 'Смотреть работы',
     },
     contact: { eyebrow: 'Прямой контакт', titleOne: 'Удобный способ', titleTwo: 'связи.', text: 'Опишите задачу, сроки и референсы. Если технического задания пока нет, достаточно рассказать о цели своими словами.', name: 'Ваше имя', namePlaceholder: 'Как к вам обращаться', email: 'Ваша почта', brief: 'Что нужно сделать', briefPlaceholder: 'Коротко опишите задачу, сроки и референсы', consent: 'Я согласен на обработку данных для ответа на заявку.', sending: 'Отправляем...', submit: 'Отправить заявку', sendingStatus: 'Отправляем заявку...', success: 'Заявка отправлена. Я свяжусь с вами по email.', error: 'Не удалось отправить заявку. Напишите мне в Telegram.' },
@@ -243,9 +243,9 @@ const copy = {
         ['Build', 'Develop the site and test responsive layouts.'],
         ['Launch', 'Publish, check and stay available.'],
       ],
-      ctaTitle: 'Have a project? Message oxssex.',
+      ctaTitle: 'Have a project? Message the manager.',
       ctaText: 'A short description, your timing and a couple of references are enough to start.',
-      ctaTelegram: 'Message on Telegram',
+      ctaTelegram: 'Message the manager',
       ctaWork: 'View selected work',
     },
     contact: { eyebrow: 'Direct contact', titleOne: 'A straightforward', titleTwo: 'way to talk.', text: 'Send the goal, timing and any references you have. No formal brief is required. A plain description is enough to start.', name: 'Your name', namePlaceholder: 'How should I address you?', email: 'Your email', brief: 'What do you need?', briefPlaceholder: 'Tell me about the project, timing and references', consent: 'I agree to the use of my details to reply to this enquiry.', sending: 'Sending...', submit: 'Send enquiry', sendingStatus: 'Sending your enquiry...', success: 'Message sent. I will reply by email.', error: 'The form did not send. Please message me on Telegram.' },
@@ -1079,7 +1079,7 @@ function AboutPage({ language, setLanguage }) {
         </ol>
       </section>
 
-      <footer className="about-cta">
+      <section className="about-cta">
         <div>
           <h2>{about.ctaTitle}</h2>
           <p>{about.ctaText}</p>
@@ -1092,8 +1092,7 @@ function AboutPage({ language, setLanguage }) {
             {about.ctaWork} <ArrowDownRight size={19} />
           </a>
         </div>
-        <p className="about-cta__meta">© 2026 oxssex</p>
-      </footer>
+      </section>
     </main>
   )
 }
