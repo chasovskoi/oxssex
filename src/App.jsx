@@ -334,8 +334,8 @@ function Header({ theme, setTheme, language, setLanguage, text, page = 'portfoli
     { id: 'top', label: text.nav.top },
     { id: 'work', label: text.nav.work },
     { id: 'approach', label: text.nav.approach },
-    { id: 'about', label: text.nav.about },
     { id: 'contact', label: text.nav.contact },
+    { id: 'about', label: text.nav.about },
   ]
   useEffect(() => {
     if (page === 'about') {
@@ -937,8 +937,8 @@ function SiteFooter({ language, footerText, page = 'portfolio' }) {
             <p>{footerText.navigation}</p>
             <a href={mainHref('work')}>{footerText.portfolio}</a>
             <a href={mainHref('approach')}>{footerText.approach}</a>
-            <a href={`${basePath}?page=about`}>{footerText.about}</a>
             <a href={mainHref('contact')}>{footerText.contacts}</a>
+            <a href={`${basePath}?page=about`}>{footerText.about}</a>
             <button type="button" onClick={() => privacyDialog.current?.showModal()}>{footerText.privacy}</button>
           </nav>
         </div>

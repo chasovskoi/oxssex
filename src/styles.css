@@ -1400,10 +1400,14 @@ img {
   gap: clamp(28px, 5vw, 72px);
 }
 
-@media (min-width: 1101px) {
+@media (min-width: 1280px) {
+  .service-composer {
+    grid-template-columns: minmax(0, 680px) minmax(0, 1fr);
+  }
+
   .service-detail {
     margin-top: clamp(-320px, -18vw, -220px);
-    margin-left: clamp(58px, 4vw, 80px);
+    margin-left: 40px;
   }
 }
 
