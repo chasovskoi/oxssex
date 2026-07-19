@@ -185,20 +185,15 @@ const copy = {
     principles: { previous: 'Предыдущий принцип', next: 'Следующий принцип' },
     about: {
       eyebrow: 'Outline Digital',
-      titleOne: 'Нас трое.',
-      titleTwo: 'Работаем из Харькова.',
-      lead: 'Работаем удалённо. oxssex ведёт проекты и остаётся главным контактом для клиента. Два программиста отвечают за разработку.',
-      sectionEyebrow: 'Команда',
-      sectionTitle: 'У каждого своя зона ответственности.',
+      titleOne: 'О компании',
+      titleTwo: 'Outline Digital',
+      lead: 'Команда разработки из Харькова: создаём сайты, веб-интерфейсы и motion-дизайн для цифровых продуктов.',
+      sectionEyebrow: 'Подход',
+      sectionTitle: 'Разбираемся в задаче до того, как выбирать инструменты',
       paragraphs: [
-        'С клиентом общается oxssex. Он собирает задачу, фиксирует сроки, показывает промежуточные версии и сводит правки. Вам не приходится пересказывать одно и то же разным людям.',
-        'Два программиста подключаются к проекту с самого начала. Они собирают интерфейс, адаптивную версию, анимацию и техническую часть сайта. Объём работы распределяем внутри команды.',
-        'Показываем результат по этапам: структура, ключевой экран, рабочая сборка. Так мы замечаем спорные места до запуска и не откладываем все правки на последний день.',
-      ],
-      roles: [
-        { number: '01', name: 'oxssex', role: 'Менеджер и лицо команды', text: 'Ведёт переписку, уточняет задачу, согласует сроки и собирает обратную связь.' },
-        { number: '02', name: 'Программист', role: 'Интерфейс и адаптив', text: 'Собирает экраны, компоненты, мобильные версии и состояния.' },
-        { number: '03', name: 'Программист', role: 'Логика и запуск', text: 'Отвечает за поведение сайта, интеграции, проверку и публикацию.' },
+        'Outline Digital разрабатывает сайты и веб-интерфейсы, продумывает структуру, визуальную систему, адаптив и motion-дизайн. Проект ведёт oxssex: он остаётся главным контактом для клиента, собирает задачу и сводит правки. Два программиста отвечают за разработку и запуск.',
+        'Команда работает удалённо из Харькова. Формат работы выбираем под задачу: сайт с нуля, отдельный интерфейс, анимация или запуск готового проекта.',
+        'Нам важно, чтобы после запуска сайт можно было поддерживать. Поэтому собираем его из понятных компонентов, проверяем адаптив и не усложняем разработку без практической причины.',
       ],
       processEyebrow: 'Как работаем',
       processTitle: 'Короткими этапами, с понятным результатом.',
@@ -212,7 +207,6 @@ const copy = {
       ctaText: 'Достаточно коротко описать проект, сроки и приложить пару референсов.',
       ctaTelegram: 'Написать в Telegram',
       ctaWork: 'Смотреть работы',
-      location: 'Харьков / удалённо',
     },
     contact: { eyebrow: 'Прямой контакт', titleOne: 'Удобный способ', titleTwo: 'связи.', text: 'Опишите задачу, сроки и референсы. Если технического задания пока нет, достаточно рассказать о цели своими словами.', name: 'Ваше имя', namePlaceholder: 'Как к вам обращаться', email: 'Ваша почта', brief: 'Что нужно сделать', briefPlaceholder: 'Коротко опишите задачу, сроки и референсы', consent: 'Я согласен на обработку данных для ответа на заявку.', sending: 'Отправляем...', submit: 'Отправить заявку', sendingStatus: 'Отправляем заявку...', success: 'Заявка отправлена. Я свяжусь с вами по email.', error: 'Не удалось отправить заявку. Напишите мне в Telegram.' },
     footer: { description: 'Сайты, веб-интерфейсы и motion-дизайн для цифровых продуктов.', services: 'Услуги', navigation: 'Навигация', portfolio: 'Портфолио', approach: 'Подход', about: 'О нас', contacts: 'Контакты', privacy: 'Политика обработки данных', copyright: '© 2026 oxssex. Все права защищены.', close: 'Закрыть', privacyOne: 'Данные из формы используются только для ответа на заявку. Имя, email и описание проекта отправляются на почту владельца сайта через сервис FormSubmit.', privacyTwo: 'Данные не продаются и не используются для рекламных рассылок. Чтобы запросить удаление информации, напишите в Telegram @oxssex.' },
@@ -231,20 +225,15 @@ const copy = {
     principles: { previous: 'Previous principle', next: 'Next principle' },
     about: {
       eyebrow: 'Outline Digital',
-      titleOne: 'There are three of us.',
-      titleTwo: 'We work from Kharkiv.',
-      lead: 'We work remotely. oxssex runs each project and remains the main contact for the client. Two developers handle the build.',
-      sectionEyebrow: 'The team',
-      sectionTitle: 'Each person has a clear area of responsibility.',
+      titleOne: 'About',
+      titleTwo: 'Outline Digital',
+      lead: 'A development team from Kharkiv building websites, web interfaces and motion design for digital products.',
+      sectionEyebrow: 'Approach',
+      sectionTitle: 'We understand the task before choosing the tools',
       paragraphs: [
-        'Clients speak with oxssex. He gathers the brief, sets the schedule, shares work in progress and organises feedback. You do not have to repeat the same context to several people.',
-        'Both developers join the project from the start. They build the interface, responsive layouts, motion and the technical parts of the website. We divide the workload inside the team.',
-        'We share the result in stages: structure, key screen and working build. This helps us catch unclear details before launch instead of leaving every change until the final day.',
-      ],
-      roles: [
-        { number: '01', name: 'oxssex', role: 'Manager and team lead', text: 'Handles communication, clarifies the brief, agrees timing and organises feedback.' },
-        { number: '02', name: 'Developer', role: 'Interface and responsive UI', text: 'Builds screens, components, mobile layouts and interface states.' },
-        { number: '03', name: 'Developer', role: 'Logic and launch', text: 'Handles site behaviour, integrations, testing and publication.' },
+        'Outline Digital builds websites and web interfaces, covering structure, visual direction, responsive layouts and motion design. oxssex runs each project as the main client contact, gathers the brief and organises feedback. Two developers handle development and launch.',
+        'The team works remotely from Kharkiv. We choose the format around the task: a new website, a standalone interface, motion work or the launch of an existing project.',
+        'We want the site to remain practical after launch. We use clear components, test responsive layouts and avoid technical complexity that the project does not need.',
       ],
       processEyebrow: 'How we work',
       processTitle: 'Short stages with a clear result.',
@@ -258,7 +247,6 @@ const copy = {
       ctaText: 'A short description, your timing and a couple of references are enough to start.',
       ctaTelegram: 'Message on Telegram',
       ctaWork: 'View selected work',
-      location: 'Kharkiv / remote',
     },
     contact: { eyebrow: 'Direct contact', titleOne: 'A straightforward', titleTwo: 'way to talk.', text: 'Send the goal, timing and any references you have. No formal brief is required. A plain description is enough to start.', name: 'Your name', namePlaceholder: 'How should I address you?', email: 'Your email', brief: 'What do you need?', briefPlaceholder: 'Tell me about the project, timing and references', consent: 'I agree to the use of my details to reply to this enquiry.', sending: 'Sending...', submit: 'Send enquiry', sendingStatus: 'Sending your enquiry...', success: 'Message sent. I will reply by email.', error: 'The form did not send. Please message me on Telegram.' },
     footer: { description: 'Websites, interfaces and motion design for digital products.', services: 'Services', navigation: 'Navigation', portfolio: 'Portfolio', approach: 'Approach', about: 'About', contacts: 'Contact', privacy: 'Data and privacy', copyright: '© 2026 oxssex. All rights reserved.', close: 'Close', privacyOne: 'Form details are used only to reply to your enquiry. Your name, email and project description are sent to the site owner through FormSubmit.', privacyTwo: 'Your details are not sold or used for marketing. To request deletion, message @oxssex on Telegram.' },
@@ -1060,12 +1048,8 @@ function AboutPage({ language, setLanguage }) {
       <section className="about-hero" id="about" data-nav-section="about">
         <div className="about-hero__copy">
           <p className="about-eyebrow">{about.eyebrow}</p>
-          <h1>{about.titleOne}<br />{about.titleTwo}</h1>
+          <h1>{about.titleOne} {about.titleTwo}</h1>
           <p className="about-lead">{about.lead}</p>
-        </div>
-        <div className="about-location" aria-label={about.location}>
-          <span>03</span>
-          <strong>{about.location}</strong>
         </div>
       </section>
 
@@ -1077,19 +1061,6 @@ function AboutPage({ language, setLanguage }) {
         <div className="about-intro__text">
           {about.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         </div>
-      </section>
-
-      <section className="about-section about-team" aria-label={about.sectionEyebrow}>
-        {about.roles.map((member) => (
-          <article className="about-role" key={member.number}>
-            <span className="about-role__number">{member.number}</span>
-            <div>
-              <h3>{member.name}</h3>
-              <p className="about-role__title">{member.role}</p>
-            </div>
-            <p className="about-role__text">{member.text}</p>
-          </article>
-        ))}
       </section>
 
       <section className="about-section about-process">
@@ -1121,7 +1092,7 @@ function AboutPage({ language, setLanguage }) {
             {about.ctaWork} <ArrowDownRight size={19} />
           </a>
         </div>
-        <p className="about-cta__meta">© 2026 oxssex · {about.location}</p>
+        <p className="about-cta__meta">© 2026 oxssex</p>
       </footer>
     </main>
   )

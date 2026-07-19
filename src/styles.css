@@ -1754,12 +1754,7 @@ img {
 }
 
 .about-hero {
-  min-height: min(900px, 92dvh);
-  padding: clamp(128px, 15vh, 172px) 0 clamp(58px, 7vw, 92px);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 80px;
+  padding: clamp(126px, 11vw, 164px) 0 clamp(92px, 9vw, 132px);
 }
 
 .about-hero__copy {
@@ -1784,42 +1779,20 @@ img {
 .about-hero h1 {
   max-width: 1380px;
   margin: 0;
-  font-size: clamp(4.1rem, 7.6vw, 8rem);
+  font-size: clamp(3.5rem, 5.4vw, 6.1rem);
   font-weight: 400;
-  line-height: 0.92;
-  letter-spacing: -0.07em;
+  line-height: 0.98;
+  letter-spacing: -0.05em;
   text-wrap: balance;
 }
 
 .about-lead {
-  max-width: 720px;
-  margin: clamp(32px, 4vw, 52px) 0 0;
+  max-width: 960px;
+  margin: clamp(30px, 3vw, 44px) 0 0;
   color: var(--muted);
-  font-size: clamp(1.05rem, 1.35vw, 1.25rem);
-  line-height: 1.55;
+  font-size: clamp(1.05rem, 1.3vw, 1.3rem);
+  line-height: 1.5;
   text-wrap: pretty;
-}
-
-.about-location {
-  padding-top: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-top: 1px solid var(--line);
-  color: var(--muted);
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.about-location span {
-  color: var(--accent);
-  font-variant-numeric: tabular-nums;
-}
-
-.about-location strong {
-  color: var(--text);
-  font-weight: 400;
 }
 
 .about-section {
@@ -1865,63 +1838,6 @@ img {
 
 .about-intro__text p + p {
   margin-top: 24px;
-}
-
-.about-team {
-  padding-top: 0;
-  padding-bottom: clamp(110px, 13vw, 180px);
-  border-top: 0;
-}
-
-.about-role {
-  min-height: 180px;
-  padding: clamp(28px, 3vw, 42px) 0;
-  display: grid;
-  grid-template-columns: 64px minmax(250px, 0.85fr) minmax(300px, 1.15fr);
-  align-items: start;
-  gap: clamp(24px, 5vw, 80px);
-  border-top: 1px solid var(--line);
-  transition: padding 420ms cubic-bezier(0.16, 1, 0.3, 1), background 300ms ease;
-}
-
-.about-role:last-child {
-  border-bottom: 1px solid var(--line);
-}
-
-.about-role:hover {
-  padding-right: 18px;
-  padding-left: 18px;
-  background: var(--surface);
-}
-
-.about-role__number {
-  padding-top: 8px;
-  color: var(--accent);
-  font-size: 0.72rem;
-  font-variant-numeric: tabular-nums;
-}
-
-.about-role h3 {
-  margin: 0;
-  font-size: clamp(2rem, 3.3vw, 3.7rem);
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: -0.055em;
-}
-
-.about-role__title {
-  margin: 14px 0 0;
-  color: var(--text);
-  font-size: 0.9rem;
-}
-
-.about-role__text {
-  max-width: 520px;
-  margin: 8px 0 0;
-  color: var(--muted);
-  font-size: 1rem;
-  line-height: 1.6;
-  text-wrap: pretty;
 }
 
 .about-process {
@@ -2651,13 +2567,12 @@ img {
   }
 
   .about-hero {
-    min-height: 760px;
-    padding-top: 142px;
-    gap: 64px;
+    padding-top: 132px;
+    padding-bottom: 92px;
   }
 
   .about-hero h1 {
-    font-size: clamp(3.5rem, 10.7vw, 6.8rem);
+    font-size: clamp(3.2rem, 9.3vw, 5.8rem);
   }
 
   .about-intro,
@@ -2669,11 +2584,6 @@ img {
   .about-intro__text {
     max-width: 720px;
     padding-top: 0;
-  }
-
-  .about-role {
-    grid-template-columns: 44px minmax(210px, 0.78fr) minmax(0, 1.22fr);
-    gap: 20px;
   }
 
   .about-process__list li {
@@ -2942,14 +2852,13 @@ img {
   }
 
   .about-hero {
-    min-height: 680px;
     padding-top: 132px;
-    padding-bottom: 44px;
+    padding-bottom: 76px;
   }
 
   .about-hero h1 {
-    font-size: clamp(3.15rem, 15vw, 5rem);
-    line-height: 0.94;
+    font-size: clamp(2.95rem, 13.2vw, 4.35rem);
+    line-height: 0.98;
   }
 
   .about-lead {
@@ -2964,33 +2873,6 @@ img {
   .about-section__heading h2,
   .about-process__heading h2 {
     font-size: clamp(2.7rem, 12vw, 4rem);
-  }
-
-  .about-team {
-    padding-top: 0;
-    padding-bottom: 96px;
-  }
-
-  .about-role {
-    min-height: 0;
-    padding: 28px 0 30px;
-    grid-template-columns: 32px 1fr;
-    gap: 12px;
-  }
-
-  .about-role:hover {
-    padding-right: 0;
-    padding-left: 0;
-    background: transparent;
-  }
-
-  .about-role__number {
-    grid-row: 1 / span 2;
-  }
-
-  .about-role__text {
-    grid-column: 2;
-    margin-top: 4px;
   }
 
   .about-process__list li {
