@@ -65,7 +65,7 @@ const testimonials = [
     name: { ru: 'Анна К.', en: 'Anna K.' },
     role: { ru: 'основатель бренда керамики', en: 'ceramics brand founder' },
     quote: {
-      ru: 'Пришли с набором скриншотов и примерным пониманием, что хотим показать. Получили не просто лендинг, а понятную структуру: прототип, ключевые экраны и адаптивную сборку. Сайт запустили за пару недель — теперь просто скидываем ссылку вместо презентации.',
+      ru: 'Пришли с набором скриншотов и примерным пониманием, что хотим показать. Получили не просто лендинг, а понятную структуру: прототип, ключевые экраны и адаптивную сборку. Сайт запустили за пару недель. Теперь просто скидываем ссылку вместо презентации.',
       en: 'We came in with a folder of screenshots and a rough idea of what we wanted to show. We got more than a landing page: a clear structure, a prototype, key screens and a responsive build. The site went live within a couple of weeks. Now we send one link instead of a presentation.',
     },
     rating: 5,
@@ -74,7 +74,7 @@ const testimonials = [
     name: { ru: 'Дмитрий Р.', en: 'Dmitry R.' },
     role: { ru: 'продакт-менеджер IT-стартапа', en: 'product manager at an IT startup' },
     quote: {
-      ru: 'Нужен был не сайт, а рабочий интерфейс для внутреннего сервиса — понятный для пользователей без лишнего технического дизайна. Получили аккуратный UI, который легко расширять под новые функции. Команда разобралась в интерфейсе без единого вопроса.',
+      ru: 'Нужен был не сайт, а понятный рабочий интерфейс для внутреннего сервиса, без лишнего технического дизайна. Получили аккуратный UI, который легко расширять под новые функции. Команда разобралась в интерфейсе без единого вопроса.',
       en: 'We needed a working interface for an internal service rather than a website. It had to feel clear to users without looking overly technical. We got a clean UI that is easy to extend with new features, and the team understood it without asking a single question.',
     },
     rating: 5,
@@ -83,7 +83,7 @@ const testimonials = [
     name: { ru: 'Марк Т.', en: 'Mark T.' },
     role: { ru: 'руководитель запуска продукта', en: 'product launch lead' },
     quote: {
-      ru: 'Хотели не статичный лендинг, а что-то живое к запуску продукта — с анимацией и динамикой при скролле. Получилось ярко и современно, хотя на согласование деталей ушло чуть больше времени, чем рассчитывали. Для запуска сработало отлично.',
+      ru: 'Хотели не статичный лендинг, а что-то живое к запуску продукта: с анимацией и динамикой при скролле. Получилось ярко и современно, хотя на согласование деталей ушло чуть больше времени, чем рассчитывали. Для запуска сработало отлично.',
       en: 'We wanted something more alive than a static landing page for the product launch, with animation and movement on scroll. The result feels bold and current, although agreeing on the details took a little longer than we expected. It worked very well for the launch.',
     },
     rating: 4,
