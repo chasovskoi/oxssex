@@ -958,22 +958,27 @@ function Portfolio({ language, setLanguage }) {
   )
 }
 
-function SiteLoader({ language, phase }) {
+function SiteLoader({ language, phase, mode }) {
   if (phase === 'done') return null
 
   return (
     <div
-      className={`site-loader${phase === 'leaving' ? ' is-leaving' : ''}`}
+      className={`site-loader is-${mode}${phase === 'leaving' ? ' is-leaving' : ''}`}
       role="status"
       aria-live="polite"
       aria-label={language === 'en' ? 'Loading site' : 'Загрузка сайта'}
     >
-      <div className="site-loader__word" aria-hidden="true">
-        {'oxssex'.split('').map((letter, index) => (
-          <span className="site-loader__letter" style={{ '--loader-index': index }} key={`${letter}-${index}`}>
-            {letter}
-          </span>
-        ))}
+      <div className="site-loader__logo" aria-hidden="true">
+        <span className="site-loader__outline">
+          <span className="site-loader__name">OUTLINE</span>
+          <i className="site-loader__dot site-loader__dot--start" />
+          <i className="site-loader__dot site-loader__dot--end" />
+          <i className="site-loader__edge site-loader__edge--top" />
+          <i className="site-loader__edge site-loader__edge--right" />
+          <i className="site-loader__edge site-loader__edge--bottom" />
+          <i className="site-loader__edge site-loader__edge--left" />
+        </span>
+        <span className="site-loader__digital">DIGITAL</span>
       </div>
     </div>
   )
@@ -982,13 +987,14 @@ function SiteLoader({ language, phase }) {
 export default function App() {
   const [language, setLanguage] = useLanguage()
   const [loaderPhase, setLoaderPhase] = useState('visible')
+  const [loaderMode] = useState(() => sessionStorage.getItem('outline-loader-seen') ? 'quick' : 'full')
   const demoSlug = new URLSearchParams(window.location.search).get('demo')
 
   useEffect(() => {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const startedAt = performance.now()
-    const minimumDuration = reducedMotion ? 120 : 1050
-    const exitDuration = reducedMotion ? 40 : 720
+    const minimumDuration = reducedMotion ? 120 : loaderMode === 'full' ? 2500 : 380
+    const exitDuration = reducedMotion ? 40 : loaderMode === 'full' ? 480 : 260
     let exitStarted = false
     let leaveTimer
     let removeTimer
@@ -998,12 +1004,13 @@ export default function App() {
       exitStarted = true
       const delay = Math.max(0, minimumDuration - (performance.now() - startedAt))
       leaveTimer = window.setTimeout(() => {
+        sessionStorage.setItem('outline-loader-seen', 'true')
         setLoaderPhase('leaving')
         removeTimer = window.setTimeout(() => setLoaderPhase('done'), exitDuration)
       }, delay)
     }
 
-    const fallbackTimer = window.setTimeout(beginExit, reducedMotion ? 180 : 2800)
+    const fallbackTimer = window.setTimeout(beginExit, reducedMotion ? 180 : loaderMode === 'full' ? 2800 : 520)
     if (document.readyState === 'complete') beginExit()
     else window.addEventListener('load', beginExit, { once: true })
 
@@ -1013,7 +1020,7 @@ export default function App() {
       window.clearTimeout(leaveTimer)
       window.clearTimeout(removeTimer)
     }
-  }, [])
+  }, [loaderMode])
 
   useEffect(() => {
     if (loaderPhase === 'done') return undefined
@@ -1027,7 +1034,7 @@ export default function App() {
   return (
     <>
       {demoSlug ? <DemoProject slug={demoSlug} language={language} /> : <Portfolio language={language} setLanguage={setLanguage} />}
-      <SiteLoader language={language} phase={loaderPhase} />
+      <SiteLoader language={language} phase={loaderPhase} mode={loaderMode} />
     </>
   )
 }
